@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+deactivated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318360580694
+activated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318360582789
+deactivated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318360810351
+activated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318360898948
+deactivated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318360958699
+activated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318360961449
+deactivated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318360961534
+activated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318360975225
+deactivated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318360976111
+activated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318361014424
+activated,editor,org.eclipse.jdt.ui,3.6.2.r362_v20110203,"org.eclipse.jdt.ui.CompilationUnitEditor",1318361014926
+activated,editor,org.eclipse.jdt.ui,3.6.2.r362_v20110203,"org.eclipse.jdt.ui.CompilationUnitEditor",1318361068586
+executed,command,org.eclipse.ui,3.6.2.M20110203-1100,"org.eclipse.ui.file.save",1318361083709
+activated,editor,org.eclipse.jdt.ui,3.6.2.r362_v20110203,"org.eclipse.jdt.ui.CompilationUnitEditor",1318361091818
+activated,editor,org.eclipse.jdt.ui,3.6.2.r362_v20110203,"org.eclipse.jdt.ui.CompilationUnitEditor",1318361118217
+executed,command,org.eclipse.ui,3.6.2.M20110203-1100,"org.eclipse.ui.file.save",1318361154696
+executed,command,org.eclipse.ui,3.6.2.M20110203-1100,"org.eclipse.ui.file.save",1318361173080
+deactivated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318361205664
+activated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318361925342
+deactivated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318361925476
+activated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318361943479
+error,log,,,"JavaBuilder handling CoreException",1318361943853
+deactivated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318361945616
+activated,workbench,org.eclipse.ui.workbench,3.6.2.M20110210-1200,"",1318361950596
+error,log,,,"JavaBuilder handling CoreException",1318361950825
