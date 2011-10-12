@@ -1,11 +1,12 @@
 
 public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	
-	private Position<E> root, parent, leftTree, rightTree;
+	private Position<E> root, parent;
+	private LinkedRBinaryTree<E> leftTree, rightTree;
 	private E element;
-	//private int size;
+	private int size;
 	
-	public LinkedRBinaryTree(Position<E> root,Position<E> parent, Position<E> leftTree, Position<E> rightTree){
+	public LinkedRBinaryTree(Position<E> root,Position<E> parent, LinkedRBinaryTree<E> leftTree, LinkedRBinaryTree<E> rightTree){
 		this.root = root;
 		this.parent = parent;
 		this.leftTree = leftTree;
@@ -13,66 +14,55 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	}
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return size() == 0;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
 		return countNode((RBinaryTree<E>)this.root);
 	}
-	private int countNode(RBinaryTree<E> tree){
-		if(tree == null)
-			return 1;
-		return 1 + countNode(tree.leftTree()) + countNode(tree.rightTree()); 
+	private int countNode(){
+		if(isLeaf()) return 1;
+		else return 1 + leftTree.countNode() + rightTree.countNode(); 
 	}
 
 	@Override
 	public Position<E> root() {
-		// TODO Auto-generated method stub
 		return root;
 	}
 
 	@Override
 	public boolean isLeaf() {
-		// TODO Auto-generated method stub
-		return (this == null);
+		return (this.leftTree == null & this.rightTree == null);
 	}
 
 	@Override
 	public RBinaryTree<E> leftTree() {
-		// TODO Auto-generated method stub
-		return (RBinaryTree<E>)this.leftTree;
+		return this.leftTree;
 	}
 
 	@Override
 	public RBinaryTree<E> rightTree() {
-		// TODO Auto-generated method stub
-		return (RBinaryTree<E>)this.rightTree;
+		return this.rightTree;
 	}
 
 	@Override
 	public void setElement(E element) {
-		// TODO Auto-generated method stub
 		this.element = element;
 	}
 
 	@Override
 	public void setLeft(RBinaryTree<E> tree) {
-		// TODO Auto-generated method stub
-		this.leftTree = (Position<E>)tree;
+		this.leftTree=tree;
 	}
 
 	@Override
 	public void setRight(RBinaryTree<E> tree) {
-		// TODO Auto-generated method stub
-		this.rightTree = (Position<E>)tree;
+		this.rightTree= tree;
 	}
 
 	@Override
 	public Iterable<Position<E>> positions() {
-		// TODO Auto-generated method stub
 		// Classe NodePositionList fournie dans DSAJ-5 section 6.2.4
 		PositionList<Position<E>> positions = new NodePositionList<Position<E>>();
 		if(size() ==0)
