@@ -2,11 +2,10 @@
 public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	
 	private Position<E> root, parent;
-	private LinkedRBinaryTree<E> leftTree, rightTree;
+	private RBinaryTree<E> leftTree, rightTree;
 	private E element;
-	private int size;
 	
-	public LinkedRBinaryTree(Position<E> root,Position<E> parent, LinkedRBinaryTree<E> leftTree, LinkedRBinaryTree<E> rightTree){
+	public RBinaryTree(Position<E> root,Position<E> parent, RBinaryTree<E> leftTree, RBinaryTree<E> rightTree){
 		this.root = root;
 		this.parent = parent;
 		this.leftTree = leftTree;
@@ -19,12 +18,10 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 
 	@Override
 	public int size() {
-		return countNode((RBinaryTree<E>)this.root);
-	}
-	private int countNode(){
 		if(isLeaf()) return 1;
-		else return 1 + leftTree.countNode() + rightTree.countNode(); 
+		else return 1 + leftTree.size() + rightTree.size(); 
 	}
+
 
 	@Override
 	public Position<E> root() {
@@ -71,10 +68,10 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 		}
 		private void preorderPositions(Position<E> v, PositionList<Position<E>> pos) throws InvalidPositionException{
 		pos.addLast(v);
-		if(((LinkedRBinaryTree<E>) this.leftTree).isLeaf())
-			preorderPositions((Position<E>)leftTree(),pos);
-		if(((LinkedRBinaryTree<E>) this.rightTree).isLeaf())
-			preorderPositions((Position<E>)rightTree(),pos);
+		if(this.leftTree).isLeaf())
+			preorderPositions(leftTree().root(),pos);
+		if(this.rightTree).isLeaf())
+			preorderPositions(rightTree().root(),pos);
 	}
 
 }
