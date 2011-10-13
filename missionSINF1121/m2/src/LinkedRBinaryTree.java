@@ -5,7 +5,7 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	private RBinaryTree<E> leftTree, rightTree;
 	private E element;
 	
-	public RBinaryTree(Position<E> root,Position<E> parent, RBinaryTree<E> leftTree, RBinaryTree<E> rightTree){
+	public LinkedRBinaryTree(Position<E> root,Position<E> parent, RBinaryTree<E> leftTree, RBinaryTree<E> rightTree){
 		this.root = root;
 		this.parent = parent;
 		this.leftTree = leftTree;
@@ -68,9 +68,9 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 		}
 		private void preorderPositions(Position<E> v, PositionList<Position<E>> pos) throws InvalidPositionException{
 		pos.addLast(v);
-		if(this.leftTree).isLeaf())
+		if(this.leftTree.isLeaf())
 			preorderPositions(leftTree().root(),pos);
-		if(this.rightTree).isLeaf())
+		if(this.rightTree.isLeaf())
 			preorderPositions(rightTree().root(),pos);
 	}
 
