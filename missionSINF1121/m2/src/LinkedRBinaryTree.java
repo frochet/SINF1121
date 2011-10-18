@@ -1,9 +1,9 @@
 
 public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	
-	private Position<E> root, parent;
-	private RBinaryTree<E> leftTree, rightTree;
-	private E element;
+	protected Position<E> root, parent;
+	protected RBinaryTree<E> leftTree, rightTree;
+	protected E element;
 	
 	public LinkedRBinaryTree(Position<E> root,Position<E> parent, RBinaryTree<E> leftTree, RBinaryTree<E> rightTree){
 		this.root = root;
@@ -42,12 +42,17 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	public RBinaryTree<E> rightTree() {
 		return this.rightTree;
 	}
+	public Position<E> parentTree(){
+		return this.parent;
+	}
 
 	@Override
 	public void setElement(E element) {
 		this.element = element;
 	}
-
+	public E element(){
+		return this.element;
+	}
 	@Override
 	public void setLeft(RBinaryTree<E> tree) {
 		this.leftTree=tree;
@@ -58,7 +63,7 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 		this.rightTree= tree;
 	}
 
-	@Override
+/*	@Override
 	public Iterable<Position<E>> positions() {
 		// Classe NodePositionList fournie dans DSAJ-5 section 6.2.4
 		PositionList<Position<E>> positions = new NodePositionList<Position<E>>();
@@ -73,5 +78,5 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 		if(this.rightTree.isLeaf())
 			preorderPositions(rightTree().root(),pos);
 	}
-
+*/
 }

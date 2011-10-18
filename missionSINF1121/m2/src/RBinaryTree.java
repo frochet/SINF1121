@@ -65,5 +65,5 @@ public interface RBinaryTree<E> {
    * @post an iterable collection of the positions of this, 
    *       following an inorder traversal, is returned. 
    */   
-  public Iterable<Position<E>> positions();
+ // public Iterable<Position<E>> positions();
 }
