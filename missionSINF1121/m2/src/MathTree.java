@@ -2,20 +2,24 @@
 public class MathTree<E> extends LinkedRBinaryTree<E> implements FormalExpressionTree {
 
 
-	public MathTree(FormalExpressionTree leftTree, MathTree<E> rightTree, E element) { //On teste deux possibilité de type d'input
-		super(leftTree, rightTree,element); //Problème d'interface avec le constructeur de la classe mère
+	
+	public MathTree(RBinaryTree<E> leftTree, RBinaryTree<E> rightTree, E element) {
+		super(leftTree, rightTree, element);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public FormalExpressionTree derive() {
+		
+		// Pas de string dans un switch ! seulement int
 		switch((String)this.element()) //Il faut creer une énum
 		{
 		case '+':
-			return new MathTree<E>(((MathTree<E>) this.leftTree).derive(), ((MathTree<E>) this.rightTree).derive(), '+'); //les casts ne passent pas
+			return new MathTree<E>; //les casts ne passent pas
 			break;
 			
 		case '-':
-			return new MathTree<E>((this.leftTree).derive(), (this.rightTree).derive(), '-'); //Les dérive ne passent pas
+			return new MathTree((RBinaryTree<E>)((MathTree<E>)(this.leftTree)).derive(), (RBinaryTree<E>)((MathTree<E>)(this.rightTree)).derive(), "-"); //Les dérive ne passent pas
 			break;
 		
 		
