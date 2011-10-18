@@ -7,31 +7,99 @@ public class MathTree<E> extends LinkedRBinaryTree<E> implements FormalExpressio
 		super(leftTree, rightTree, element);
 		// TODO Auto-generated constructor stub
 	}
+	public MathTree(E element) {
+		super (null, null, element);
+	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public FormalExpressionTree derive() {
 		
-		// Pas de string dans un switch ! seulement int
-		switch((String)this.element()) //Il faut creer une énum
+		if(this.element().getClass()==java.lang.Number)
 		{
-		case '+':
-			return new MathTree<E>; //les casts ne passent pas
-			break;
+			return null;
+		}
 			
-		case '-':
-			return new MathTree((RBinaryTree<E>)((MathTree<E>)(this.leftTree)).derive(), (RBinaryTree<E>)((MathTree<E>)(this.rightTree)).derive(), "-"); //Les dérive ne passent pas
-			break;
+		if(element()=="+")
+		{			
+			return new MathTree<E>(
+									(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
+									(RBinaryTree<E>)((MathTree<E>)(rightTree)).derive(),
+									element);
+		}
+	
+		if (element()=="-")
+		{
+			return new MathTree<E>(
+									(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
+									(RBinaryTree<E>)((MathTree<E>)(rightTree)).derive(),
+									element);
+		}
 		
+		if (this.element()=="*")
+		{	
+			return new MathTree<E>(
+									new MathTree<E>(
+													leftTree,
+													(RBinaryTree<E>)((MathTree<E>)(rightTree)).derive(),
+													element),
+									new MathTree<E>(
+													(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
+													rightTree,
+													element),
+									/*"+"*/);
+		}
 		
-		case '*':
-			break;
-			
-			
+		if (this.element()=="/")
+		{
+			return new MathTree<E>(
+									new MathTree<E>(
+													new MathTree<E>(
+																	rightTree,
+																	(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
+																	/*"*"*/),
+													new MathTree<E>(
+																	(RBinaryTree<E>)((MathTree<E>)(rightTree)).derive(),
+																	leftTree,
+																	/*"*"*/),
+													/*"'-'"*/),
+									new MathTree<E>(
+													rightTree,
+													MathTree<E>(/*"2"*/),
+													/*"exp"*/)),
+									/*"/'"*/);
 		}
 		
 		
+		if (this.element()=="sin")
+		{
+			return new MathTree<E>(
+									(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
+									new MathTree<E>(
+												leftTree,
+												null,
+												/*"cos"*/),
+									/*"*"*/);								
+		}
 		
-		return null;
+		if (this.element()=="cos")
+		{
+			return new MathTree<E>(
+									null,
+									new MathTree<E>(				
+													(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
+													new MathTree<E>(
+																leftTree,
+																null,
+																/*"cos"*/),
+													/*"*"*/),
+									/*"-"*/);								
+		}
+		
+		if (this.element()=="exp")
+		{
+			return new MathTree<E>();								
+		}
 	}
 	
 	@Override
