@@ -1,4 +1,3 @@
-
 public class MathTree<E> extends LinkedRBinaryTree<E> implements FormalExpressionTree {
 
 
@@ -15,6 +14,24 @@ public class MathTree<E> extends LinkedRBinaryTree<E> implements FormalExpressio
 	@Override
 	public FormalExpressionTree derive() {
 		
+		
+		/*	public static void main(String[] args)
+	{
+		Integer i = 17;
+		String str = "19";
+		System.out.println( i.getClass() );
+		System.out.println( str.getClass() );
+
+	
+	}
+	
+	Résultat : 
+	
+	class java.lang.Integer
+	class java.lang.String
+
+Ca me semblait audacieux, je vais corriger ça ^^
+*/
 		if(this.element().getClass()==java.lang.Number)
 		{
 			return null;
