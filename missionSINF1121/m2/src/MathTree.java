@@ -1,15 +1,32 @@
 
 public class MathTree<E> extends LinkedRBinaryTree<E> implements FormalExpressionTree {
 
-	public MathTree(Position<E> parent, RBinaryTree<E> leftTree,
-			RBinaryTree<E> rightTree, E element) {
-		super(parent, leftTree, rightTree,element);
-		// TODO Auto-generated constructor stub
+
+	public MathTree(FormalExpressionTree leftTree, MathTree<E> rightTree, E element) { //On teste deux possibilité de type d'input
+		super(leftTree, rightTree,element); //Problème d'interface avec le constructeur de la classe mère
 	}
 
 	@Override
 	public FormalExpressionTree derive() {
-		// TODO Auto-generated method stub
+		switch((String)this.element()) //Il faut creer une énum
+		{
+		case '+':
+			return new MathTree<E>(((MathTree<E>) this.leftTree).derive(), ((MathTree<E>) this.rightTree).derive(), '+'); //les casts ne passent pas
+			break;
+			
+		case '-':
+			return new MathTree<E>((this.leftTree).derive(), (this.rightTree).derive(), '-'); //Les dérive ne passent pas
+			break;
+		
+		
+		case '*':
+			break;
+			
+			
+		}
+		
+		
+		
 		return null;
 	}
 	
@@ -21,3 +38,5 @@ public class MathTree<E> extends LinkedRBinaryTree<E> implements FormalExpressio
 	// Besoin de methodes d'ajout ?
 
 }
+
+
