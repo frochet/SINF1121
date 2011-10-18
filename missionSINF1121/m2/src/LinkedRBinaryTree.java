@@ -1,13 +1,12 @@
-
 public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	
-	protected Position<E> root, parent;
+	protected Position<E> root /*, parent*/;
 	protected RBinaryTree<E> leftTree, rightTree;
 	protected E element;
 	
-	public LinkedRBinaryTree(Position<E> parent, RBinaryTree<E> leftTree, RBinaryTree<E> rightTree, E element){
+	public LinkedRBinaryTree(/*Position<E> parent,*/ RBinaryTree<E> leftTree, RBinaryTree<E> rightTree, E element){
 		this.root = (Position<E>)this;
-		this.parent = parent;
+		/*this.parent = parent;*/
 		this.leftTree = leftTree;
 		this.rightTree = rightTree;
 		this.element = element;
@@ -43,9 +42,9 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	public RBinaryTree<E> rightTree() {
 		return this.rightTree;
 	}
-	public Position<E> parentTree(){
+	/*public Position<E> parentTree(){
 		return this.parent;
-	}
+	}*/
 
 	@Override
 	public void setElement(E element) {
