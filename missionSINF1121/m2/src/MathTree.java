@@ -1,11 +1,10 @@
 
-public class MathTree<E> extends LinkedRBinaryTree implements FormalExpressionTree {
+public class MathTree<E> extends LinkedRBinaryTree<E> implements FormalExpressionTree {
 
-	public MathTree(Position<E> root, Position<E> parent, RBinaryTree<E> leftTree,
+	public MathTree(Position<E> parent, RBinaryTree<E> leftTree,
 			RBinaryTree<E> rightTree, E element) {
-		super(root, parent, leftTree, rightTree);
+		super(parent, leftTree, rightTree,element);
 		// TODO Auto-generated constructor stub
-		setElement(element);
 	}
 
 	@Override

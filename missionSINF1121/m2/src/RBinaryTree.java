@@ -3,7 +3,7 @@
  *
  * This interface uses the Position interface described in DSAJ-4.  
  */
-public interface RBinaryTree<E> {
+public interface RBinaryTree<E> extends Position<E> {
   /**
    * @pre -
    * @post return true if this is empty, false otherwise.
