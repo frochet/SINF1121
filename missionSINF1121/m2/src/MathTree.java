@@ -1,12 +1,13 @@
-public class MathTree<E> extends LinkedRBinaryTree<E> implements FormalExpressionTree {
+public class MathTree extends LinkedRBinaryTree<String> implements FormalExpressionTree {
 
 
 	
-	public MathTree(RBinaryTree<E> leftTree, RBinaryTree<E> rightTree, E element) {
+	public MathTree(RBinaryTree<String> leftTree, RBinaryTree<String> rightTree, String element) {
 		super(leftTree, rightTree, element);
-		// TODO Auto-generated constructor stub
 	}
-	public MathTree(E element) {
+	
+	
+	public MathTree(String element) {
 		super (null, null, element);
 	}
 
@@ -39,83 +40,83 @@ Ca me semblait audacieux, je vais corriger ça ^^
 			
 		if(element()=="+")
 		{			
-			return new MathTree<E>(
-									(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
-									(RBinaryTree<E>)((MathTree<E>)(rightTree)).derive(),
-									element);
+			return new MathTree(
+						(RBinaryTree<String>)((MathTree)leftTree).derive(),
+						(RBinaryTree<String>)((MathTree)(rightTree)).derive(),
+						element);
 		}
 	
 		if (element()=="-")
 		{
-			return new MathTree<E>(
-									(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
-									(RBinaryTree<E>)((MathTree<E>)(rightTree)).derive(),
-									element);
+			return new MathTree(
+						(RBinaryTree<String>)((MathTree)(leftTree)).derive(),
+						(RBinaryTree<String>)((MathTree)(rightTree)).derive(),
+						element);
 		}
 		
 		if (this.element()=="*")
 		{	
-			return new MathTree<E>(
-									new MathTree<E>(
-													leftTree,
-													(RBinaryTree<E>)((MathTree<E>)(rightTree)).derive(),
-													element),
-									new MathTree<E>(
-													(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
-													rightTree,
-													element),
-									/*"+"*/);
+			return new MathTree(
+						new MathTree(
+								leftTree,
+								(RBinaryTree<String>)((MathTree)(rightTree)).derive(),
+								element),
+						new MathTree(
+								(RBinaryTree<String>)((MathTree)(leftTree)).derive(),
+								rightTree,
+								element),
+						"+");
 		}
 		
 		if (this.element()=="/")
 		{
-			return new MathTree<E>(
-									new MathTree<E>(
-													new MathTree<E>(
-																	rightTree,
-																	(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
-																	/*"*"*/),
-													new MathTree<E>(
-																	(RBinaryTree<E>)((MathTree<E>)(rightTree)).derive(),
-																	leftTree,
-																	/*"*"*/),
-													/*"'-'"*/),
-									new MathTree<E>(
-													rightTree,
-													MathTree<E>(/*"2"*/),
-													/*"exp"*/)),
-									/*"/'"*/);
+			return new MathTree(
+						new MathTree(
+								new MathTree(
+										rightTree,
+										(RBinaryTree<String>)((MathTree)(leftTree)).derive(),
+										"*"),
+								new MathTree(
+										(RBinaryTree<String>)((MathTree)(rightTree)).derive(),
+										leftTree,
+										"*"),
+								"-"),
+						new MathTree(
+										rightTree,
+										new MathTree("2"),
+										"exp"),
+						"/");
 		}
 		
 		
 		if (this.element()=="sin")
 		{
-			return new MathTree<E>(
-									(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
-									new MathTree<E>(
-												leftTree,
-												null,
-												/*"cos"*/),
-									/*"*"*/);								
+			return new MathTree(
+					(RBinaryTree<String>)((MathTree)(leftTree)).derive(),
+					new MathTree(
+							leftTree,
+							null,
+							"cos"),
+					"*");								
 		}
 		
 		if (this.element()=="cos")
 		{
-			return new MathTree<E>(
+			return new MathTree(
+					null,
+					new MathTree(				
+							(RBinaryTree<String>)((MathTree)(leftTree)).derive(),
+							new MathTree(
+									leftTree,
 									null,
-									new MathTree<E>(				
-													(RBinaryTree<E>)((MathTree<E>)(leftTree)).derive(),
-													new MathTree<E>(
-																leftTree,
-																null,
-																/*"cos"*/),
-													/*"*"*/),
-									/*"-"*/);								
+									"cos"),
+							"*"),
+					"-");								
 		}
 		
-		if (this.element()=="exp")
+		if (this.element()=="^")
 		{
-			return new MathTree<E>();								
+			return new MathTree();								
 		}
 	}
 	
