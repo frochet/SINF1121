@@ -7,61 +7,61 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class InOut {
-	// Correction : Flo
-	// Pour que la classe soit plus complète, il manque la vérification dans les méthodes readLine et write si les fichiers existent bien
-	// Sinon, dans le cas de write, faut le créer et dans le cas de read, faut lever une exception.
+
 	
 	private String filePathIn;
 	private String filePathOut;
-
+	private FileReader fr;
+	private BufferedReader bf;
+	private FileWriter fw;
+	private BufferedWriter bw;
+	
 	public InOut(String filePathIn, String filePathOut){
 		this.filePathIn = filePathIn;
 		this.filePathOut = filePathOut;
+
+		try {
+			this.fr = new FileReader(this.filePathIn);
+			this.bf = new BufferedReader(fr);
+			fw = new FileWriter(this.filePathOut);
+			bw = new BufferedWriter(fw);
+
+		}
+		catch (FileNotFoundException e) {
+			System.out.println("Impossible de trouver le fichier" + this.filePathIn);			
+		} 	
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String readLine(){
 
-		FileReader fr = null;
-		BufferedReader bf = null;
-		String line = null;
-
+		String line = "";
 		try {
-			fr = new FileReader(filePathIn);
-			bf = new BufferedReader(fr);
-
-			try {
-				while((line = bf.readLine()) != null){
-					// Comment ça appel du parser ?? Jamais !
-					return line;
-				}
-			}		
-			catch (IOException e) {
-				System.out.println("Impossible de lire : " + line);
+			while((line = bf.readLine()) != null){
+				// Comment ça appel du parser ?? Jamais !
+				return line;
 			}
-			finally{
-				bf.close();
-			}			
 		}		
-		catch (FileNotFoundException e) {
-			System.out.println("Impossible de trouver le fichier" + filePathIn);			
-		} 		
 		catch (IOException e) {
-			System.out.println("Erreur de lecture");
-		}	
+			System.out.println("Impossible de lire : " + line);
+		}
+		finally{
+			try {
+				bf.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}				
 		return null;
 	}
 
 	public void write(String s) {
-
-		FileWriter fw = null;
-		BufferedWriter bw = null;
-
 		try {
-			fw = new FileWriter(filePathOut);
-			bw = new BufferedWriter(fw);
-
 			bw.write(s);
-
 			bw.close();
 
 		} catch (IOException e) {
