@@ -84,13 +84,13 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 			
 			else if (this.element()=="*")
 			{	
-                                if (((MathTree)rightTree).derive()==null & ((MathTree)leftTree).derive()==null)
+                if (((MathTree)rightTree).derive()==null & ((MathTree)leftTree).derive()==null)
 				{
 					return null;
 				}				
 
 
-                                else if (((MathTree)leftTree).derive()==null)
+                else if (((MathTree)leftTree).derive()==null)
 				{
 					return new MathTree(
 							leftTree,
@@ -122,7 +122,39 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 			
 			else if (this.element()=="/")
 			{
-                             return new MathTree(
+                if (((MathTree)(leftTree)).derive()==null)
+                {
+                	return new MathTree(
+							new MathTree(
+									null,
+									new MathTree(
+											(RBinaryTree<String>)((MathTree)(rightTree)).derive(),
+											leftTree,
+											"*"),
+									"-"),
+							new MathTree(
+											rightTree,
+											new MathTree("2"),
+											"^"),
+							"/");
+                }
+                
+                else if (((MathTree)(rightTree)).derive()==null)
+                {
+                	return new MathTree(
+							new MathTree(
+											rightTree,
+											(RBinaryTree<String>)((MathTree)(leftTree)).derive(),
+											"*"),
+							new MathTree(
+											rightTree,
+											new MathTree("2"),
+											"^"),
+							"/");
+                }
+                else
+                {
+                	return new MathTree(
 							new MathTree(
 									new MathTree(
 											rightTree,
@@ -138,25 +170,26 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 											new MathTree("2"),
 											"^"),
 							"/");
+                }
 			}
 			
 			
 			else if (this.element()=="sin")
 			{
-				if (((MathTree)(leftTree)).derive()==null)
+				if (((MathTree)(rightTree)).derive()==null)
 				{
 					return new MathTree(
-							leftTree,
 							null,
+							rightTree,
 							"cos");
 				}
 				else
 				{
 					return new MathTree(
-							(RBinaryTree<String>)((MathTree)(leftTree)).derive(),
+							(RBinaryTree<String>)((MathTree)(rightTree)).derive(),
 							new MathTree(
-									leftTree,
 									null,
+									rightTree,
 									"cos"),
 							"*");
 				}								
@@ -164,11 +197,11 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 			
 			else if (this.element()=="cos")
 			{
-				if (((MathTree)(leftTree)).derive()==null)
+				if (((MathTree)(rightTree)).derive()==null)
 				{
 					return new MathTree(
-							leftTree,
 							null,
+							rightTree,
 							"sin");
 				}
 				else
@@ -176,10 +209,10 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				return new MathTree(
 						null,
 						new MathTree(				
-								(RBinaryTree<String>)((MathTree)(leftTree)).derive(),
+								(RBinaryTree<String>)((MathTree)(rightTree)).derive(),
 								new MathTree(
-										leftTree,
 										null,
+										rightTree,
 										"sin"),
 								"*"),
 						"-");
@@ -193,7 +226,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 						new MathTree(
 								new MathTree(
 										leftTree,
-										rightTree, //-1
+										new MathTree(""+(Double.parseDouble(rightTree.element())-1)),
 										"^"),
 								(RBinaryTree<String>)((MathTree)(rightTree)).derive(),
 								"*"),
