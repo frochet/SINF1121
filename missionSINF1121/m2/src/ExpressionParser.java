@@ -2,8 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mission2;
-
+ // Attention a la definition des package, non valide chez les autres.
+// => travaillé dans le default package.
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -16,7 +16,7 @@ public class ExpressionParser {
     private ArrayList<Integer> openingParenthese;
     private Stack<Integer> closingParenthese;
     private ArrayList<Integer> operateur;
-    private MathTree<String> expressionTree;
+    private MathTree expressionTree;
     private ArrayList<Integer> function;
     private int index;
     private String expression;
