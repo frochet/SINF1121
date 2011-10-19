@@ -7,12 +7,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class InOut {
+	// Correction : Flo
+	// Pour que la classe soit plus complète, il manque la vérification dans les méthodes readLine et write si les fichiers existent bien
+	// Sinon, dans le cas de write, faut le créer et dans le cas de read, faut lever une exception.
+	
+	private String filePathIn;
+	private String filePathOut;
 
-	public InOut(){
-
+	public InOut(String filePathIn, String filePathOut){
+		this.filePathIn = filePathIn;
+		this.filePathOut = filePathOut;
 	}
 
-	public void read(String filePathIn){
+	public String readLine(){
 
 		FileReader fr = null;
 		BufferedReader bf = null;
@@ -24,9 +31,8 @@ public class InOut {
 
 			try {
 				while((line = bf.readLine()) != null){
-
-					// Appel du Parser;
-
+					// Comment ça appel du parser ?? Jamais !
+					return line;
 				}
 			}		
 			catch (IOException e) {
@@ -42,10 +48,10 @@ public class InOut {
 		catch (IOException e) {
 			System.out.println("Erreur de lecture");
 		}	
-
+		return null;
 	}
 
-	public void write(String filePathOut, String s) {
+	public void write(String s) {
 
 		FileWriter fw = null;
 		BufferedWriter bw = null;
