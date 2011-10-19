@@ -116,17 +116,24 @@ Ca me semblait audacieux, je vais corriger ça ^^
 		
 		if (this.element()=="^")
 		{
-			return new MathTree();								
+			return new MathTree(
+					rightTree,
+					new MathTree(
+							new MathTree(
+									leftTree,
+									rightTree, //-1
+									"^"),
+							(RBinaryTree<String>)((MathTree)(rightTree)).derive(),
+							"*"),
+					"*");								
 		}
 	}
 	
 	@Override
-	public String toString(){
-		return null;
+	public String toString(){	
+		return "("+leftTree.toString()+") "+element+" ("+rightTree.toString()+")";
 	}
 	
-	// Besoin de methodes d'ajout ?
-
 }
 
 
