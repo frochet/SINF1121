@@ -13,7 +13,8 @@ import java.util.Stack;
  */
 public class ExpressionParser {
 
-    private ArrayList<Integer> openingParenthese;
+    private static final String[] String = null;
+	private ArrayList<Integer> openingParenthese;
     private Stack<Integer> closingParenthese;
     private ArrayList<Integer> operateur;
     private MathTree<String> expressionTree;
@@ -75,8 +76,35 @@ public class ExpressionParser {
     }
 
     private RBinaryTree<String> buildChildExpression(String expression, int index) {
-
-
+    		String tmp = expression.substring(1,1);
+    		if(tmp == "("){ // On enleve la parenthèse parasite du début s'il y en a une
+    			expression = expression.substring(2,expression.length()-1);
+    		}
+    		int parCounter = 0;
+    		int i = 0;
+    		String s1 = null;
+    		String s2 = null;
+    		
+    		while(expression != null) // Tant qu'on est pas sur un opérateur libre
+    		{
+    			if(String[i] == "(")
+    				parCounter++;
+    			else if(String[i] == ")")
+    				parCounter--;
+    			
+    			if(isOperator && parCounter == 0)
+    			{
+    				s1 = expression.substring(0, OperatorIndex-1);
+    				s2 = expression.substring(OperatorIndex+1,expression.length());
+    				
+    				// On met l'opérateur au noeud considéré
+    				// On appelle buildChildExpression avec s1 et s2 pour les arbres de gauches et de droites
+    				
+    			}
+    			
+    			// Si il n'y a plus d'opérateur, on ajoute les valeurs au noeud terminaux
+    	}
+    		
 
 
 
