@@ -44,7 +44,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				return new MathTree("1");
 			}
 			
-			else return new MathTree("0");
+			else return null
 		}
 		else
 		{
