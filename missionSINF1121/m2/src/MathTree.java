@@ -84,7 +84,13 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 			
 			else if (this.element()=="*")
 			{	
-				if (((MathTree)leftTree).derive()==null)
+                                if (((MathTree)rightTree).derive()==null & ((MathTree)leftTree).derive()==null)
+				{
+					return null;
+				}				
+
+
+                                else if (((MathTree)leftTree).derive()==null)
 				{
 					return new MathTree(
 							leftTree,
@@ -98,10 +104,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 							rightTree,
 							"*");
 				}
-				else if (((MathTree)rightTree).derive()==null & ((MathTree)leftTree).derive()==null)
-				{
-					return null;
-				}
+				
 				else
 				{
 					return new MathTree(
@@ -117,9 +120,9 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}
 			}
 			
-			else if (this.element()=="/") // A modifier
+			else if (this.element()=="/")
 			{
-				return new MathTree(
+                             return new MathTree(
 							new MathTree(
 									new MathTree(
 											rightTree,
