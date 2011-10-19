@@ -9,102 +9,134 @@ import java.util.Stack;
 
 /**
  *
- * @author Abdel
+ * @author Abdel Quentin
  */
 public class ExpressionParser {
 
-    private static final String[] String = null;
-	private ArrayList<Integer> openingParenthese;
-    private Stack<Integer> closingParenthese;
-    private ArrayList<Integer> operateur;
     private MathTree<String> expressionTree;
-    private ArrayList<Integer> function;
     private int index;
     private String expression;
 
     public ExpressionParser(String expression) {
         this.expression = expression;
-        this.index = 0;
-        this.openingParenthese = new ArrayList<Integer>();
-        this.closingParenthese = new Stack<Integer>();
-        this.operateur = new ArrayList<Integer>();
-        function = new ArrayList<Integer>();
+        this.index = 1;
         init();
+        RBinaryTree<String> root = buildChildExpression(expression);
+
 
 
 
     }
 
     private void init() {
-        while (index < expression.length()) {
-            String tmp = expression.substring(index, index + 1);
-            if (index + 3 < expression.length()) {
+        /**
+        while (index < expression.length() - 1) {
+        String tmp = expression.substring(index, index + 1);
 
-            }
-            if (ParserToken.isParentheseOuvranteToken(tmp)) {
-                openingParenthese.add(index);
+        if (ParserToken.isParentheseOuvranteToken(tmp)) {
+        openingParenthese.add(index);
 
-            } else if (ParserToken.isOperateurToken(tmp)) {
-                operateur.add(index);
+        } else if (ParserToken.isOperateurToken(tmp)) {
+        operateur.add(index);
 
 
-            } else if (ParserToken.isParentheseFermanteToken(tmp)) {
-                closingParenthese.add(index);
+        } else if (ParserToken.isParentheseFermanteToken(tmp)) {
+        closingParenthese.add(index);
 
-            } else if (index + 3 < expression.length()) {
-                String funString = expression.substring(index, index + 3);
-                if (ParserToken.isFonctionToken(funString)) {
+        } else if (index + 3 < expression.length()) {
+        String funString = expression.substring(index, index + 3);
+        if (ParserToken.isFonctionToken(funString)) {
 
-                    function.add(index);
-                }
-            }
-
-            index++;
-
+        function.add(index);
         }
-
-
+        }
+        index++;
+        }
+         * */
     }
 
     @Override
     public String toString() {
-        System.out.println("Ouvrante se trouve en pos : " + openingParenthese);
-        System.out.println("Fermante en pos : " + closingParenthese);
-        System.out.println("Operateur en pos : " + operateur);
-        System.out.println("function en pos : " + function);
         return " finiii";
     }
 
-    private RBinaryTree<String> buildChildExpression(String expression, int index) {
-    		String tmp = expression.substring(1,1);
-    		if(tmp == "("){ // On enleve la parenthèse parasite du début s'il y en a une
-    			expression = expression.substring(2,expression.length()-1);
-    		}
-    		int parCounter = 0;
-    		int i = 0;
-    		String s1 = null;
-    		String s2 = null;
-    		
-    		while(expression != null) // Tant qu'on est pas sur un opérateur libre
-    		{
-    			if(String[i] == "(")
-    				parCounter++;
-    			else if(String[i] == ")")
-    				parCounter--;
-    			
-    			if(isOperator && parCounter == 0)
-    			{
-    				s1 = expression.substring(0, OperatorIndex-1);
-    				s2 = expression.substring(OperatorIndex+1,expression.length());
-    				
-    				// On met l'opérateur au noeud considéré
-    				// On appelle buildChildExpression avec s1 et s2 pour les arbres de gauches et de droites
-    				
-    			}
-    			
-    			// Si il n'y a plus d'opérateur, on ajoute les valeurs au noeud terminaux
-    	}
-    		
+    private RBinaryTree<String> buildChildExpression(String expression) {
+        
+
+        ArrayList<Integer> openingParenthese;
+        Stack<Integer> closingParenthese;
+        ArrayList<Integer> operateur;
+        ArrayList<Integer> function;
+
+        function = new ArrayList<Integer>();
+
+        openingParenthese = new ArrayList<Integer>();
+        closingParenthese = new Stack<Integer>();
+        operateur = new ArrayList<Integer>();
+
+        RBinaryTree<String> root;
+        boolean thereIsAnOperator = false;
+        int expressionIndex = 1;
+        while (expressionIndex < expression.length() - 1) {
+            String tmp = expression.substring(expressionIndex, expressionIndex + 1);
+//            System.out.println("entreee");
+            System.out.println(expression);
+            if (ParserToken.isParentheseOuvranteToken(tmp)) {
+                openingParenthese.add(expressionIndex);
+                expression=expression.substring(1);
+                System.out.println("ajout parenthese");
+
+            } else if (ParserToken.isOperateurToken(tmp)) {
+            	 thereIsAnOperator = true;
+                operateur.add(expressionIndex);
+
+                if ((openingParenthese.size() >= closingParenthese.size())) {
+
+                    root = new LinkedRBinaryTree<String>(null, null, null, tmp);
+                    System.out.println("Operateur racine = " + tmp);
+                    if (expression.length()  > 1) {
+                        root.setLeft(buildChildExpression(expression.substring(0, expressionIndex)));
+                        root.setRight(buildChildExpression(expression.substring(expressionIndex, expression.length())));
+                    }
+                }
+
+
+            } else if (ParserToken.isParentheseFermanteToken(tmp)) {
+                closingParenthese.add(expressionIndex);
+
+            } else if (expressionIndex + 3 < expression.length()) {
+                String funString = expression.substring(expressionIndex, expressionIndex + 3);
+                if (ParserToken.isFonctionToken(funString)) {
+                	thereIsAnOperator = true;
+                    function.add(expressionIndex);
+                    root = new LinkedRBinaryTree<String>(null, null, null, funString);
+                    System.out.println("Operateur racine = " + funString);
+
+                    root.setLeft(buildChildExpression(expression.substring(expressionIndex +3,expression.length()-1)));
+
+                }
+            }else if (ParserToken.isExposantToken(tmp)) {
+            	 	thereIsAnOperator = true;
+                    root = new LinkedRBinaryTree<String>(null, null, null, tmp);
+                    System.out.println("Operateur racine = " + tmp);
+                    if (expression.length() - 1 > 1) {
+                        root.setLeft(buildChildExpression(expression.substring(0, expressionIndex )));
+                        root.setRight(buildChildExpression(expression.substring(expressionIndex, expression.length())));
+                    }
+
+
+            }
+            
+            if (!thereIsAnOperator) {
+            	root = new LinkedRBinaryTree<String>(null, null, null, expression);
+            }
+            expressionIndex++;
+            
+        }
+
+
+
+
 
 
 
