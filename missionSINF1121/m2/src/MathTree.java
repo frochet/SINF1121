@@ -39,16 +39,16 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 	
 		if (isLeaf())
 		{
-			if (element()=="x")
+			if (element().toString()=="x")
 			{
 				return new MathTree("1");
 			}
 			
-			else return null;
+			else return new MathTree("0");
 		}
 		else
 		{
-			if(element()=="+")
+			if(element().toString()=="+")
 			{			
 				if (((MathTree)leftTree).derive()==null)
 				{
@@ -67,7 +67,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}
 			}
 		
-			else if (element()=="-")
+			else if (element().toString()=="-")
 			{
 				if (((MathTree)rightTree).derive()==null)
 				{
@@ -82,7 +82,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}
 			}
 			
-			else if (this.element()=="*")
+			else if (this.element().toString()=="*")
 			{	
                 if (((MathTree)rightTree).derive()==null & ((MathTree)leftTree).derive()==null)
 				{
@@ -120,7 +120,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}
 			}
 			
-			else if (this.element()=="/")
+			else if (this.element().toString()=="/")
 			{
                 if (((MathTree)(leftTree)).derive()==null)
                 {
@@ -174,7 +174,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 			}
 			
 			
-			else if (this.element()=="sin")
+			else if (this.element().toString()=="sin")
 			{
 				if (((MathTree)(rightTree)).derive()==null)
 				{
@@ -195,7 +195,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}								
 			}
 			
-			else if (this.element()=="cos")
+			else if (this.element().toString()=="cos")
 			{
 				if (((MathTree)(rightTree)).derive()==null)
 				{
@@ -219,7 +219,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}
 			}
 			
-			else if (this.element()=="^") //A modifier
+			else if (this.element().toString()=="^") //A modifier
 			{
 				return new MathTree(
 						rightTree,
