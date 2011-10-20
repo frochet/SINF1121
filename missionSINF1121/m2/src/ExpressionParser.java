@@ -13,15 +13,11 @@ import java.util.Stack;
  */
 public class ExpressionParser {
 
-<<<<<<< HEAD
-    private MathTree<String> expressionTree;
-=======
     private ArrayList<Integer> openingParenthese;
     private Stack<Integer> closingParenthese;
     private ArrayList<Integer> operateur;
     private MathTree expressionTree;
     private ArrayList<Integer> function;
->>>>>>> f778aabf348d6c91fbce6b9a079a9f191665785d
     private int index;
     private String expression;
 

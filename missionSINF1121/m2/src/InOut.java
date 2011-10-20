@@ -20,6 +20,9 @@ public class InOut {
 		this.filePathIn = filePathIn;
 		this.filePathOut = filePathOut;
 
+	}
+	public void init(){
+
 		try {
 			this.fr = new FileReader(this.filePathIn);
 			this.bf = new BufferedReader(fr);
@@ -47,14 +50,6 @@ public class InOut {
 		}		
 		catch (IOException e) {
 			System.out.println("Impossible de lire : " + line);
-		}
-		finally{
-			try {
-				bf.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}				
 		return null;
 	}
@@ -62,11 +57,27 @@ public class InOut {
 	public void write(String s) {
 		try {
 			bw.write(s);
-			bw.close();
 
 		} catch (IOException e) {
 
 			System.out.println("Fichier de destination invalide");
+		}
+
+	}
+	public void closeReader(){
+		try {
+			this.bf.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void closeWriter(){
+		try {
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}
