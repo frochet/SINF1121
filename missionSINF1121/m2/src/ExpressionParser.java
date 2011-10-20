@@ -2,62 +2,42 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
- // Attention a la definition des package, non valide chez les autres.
-// => travaillé dans le default package.
+
 import java.util.ArrayList;
 import java.util.Stack;
 
 /**
  *
- * @author Abdel Quentin
+ * @author Abdelali Ajrhourh & Cappart Quentin
  */
+
 public class ExpressionParser {
 
-    private ArrayList<Integer> openingParenthese;
-    private Stack<Integer> closingParenthese;
-    private ArrayList<Integer> operateur;
     private MathTree expressionTree;
-    private ArrayList<Integer> function;
     private int index;
     private String expression;
+    private InOut in;
 
-    public ExpressionParser(String expression) {
-        this.expression = expression;
+    public ExpressionParser() {
+    	
+    	in = new InOut("C:\\Users\\Pierre-Yves\\SINF1121\\mission1SINF1121\\mission1\\test\\test.txt", "C:\\Users\\Pierre-Yves\\SINF1121\\mission1SINF1121\\mission1\\test\\test2.txt");
+    	in.init();
+        while((expression = in.readLine())!=null){
+    	this.expression = expression;
         this.index = 1;
-        init();
-        RBinaryTree<String> root = buildChildExpression(expression);
-
-
-
+        RBinaryTree<String> root= buildChildExpression(expression);
+        ExpressionParser.affiche(root);
+        expressionTree=new MathTree(root.leftTree(), root.rightTree(), root.element());
+        }
+        in.closeReader();
 
     }
 
-    private void init() {
-        /**
-        while (index < expression.length() - 1) {
-        String tmp = expression.substring(index, index + 1);
-
-        if (ParserToken.isParentheseOuvranteToken(tmp)) {
-        openingParenthese.add(index);
-
-        } else if (ParserToken.isOperateurToken(tmp)) {
-        operateur.add(index);
-
-
-        } else if (ParserToken.isParentheseFermanteToken(tmp)) {
-        closingParenthese.add(index);
-
-        } else if (index + 3 < expression.length()) {
-        String funString = expression.substring(index, index + 3);
-        if (ParserToken.isFonctionToken(funString)) {
-
-        function.add(index);
-        }
-        }
-        index++;
-        }
-         * */
+    public MathTree getExpressionTree() {
+        return expressionTree;
     }
+
+   
 
     @Override
     public String toString() {
@@ -65,42 +45,44 @@ public class ExpressionParser {
     }
 
     private RBinaryTree<String> buildChildExpression(String expression) {
-        
+
 
         ArrayList<Integer> openingParenthese;
         Stack<Integer> closingParenthese;
         ArrayList<Integer> operateur;
         ArrayList<Integer> function;
 
+        boolean operatorFound = false;
         function = new ArrayList<Integer>();
 
         openingParenthese = new ArrayList<Integer>();
         closingParenthese = new Stack<Integer>();
         operateur = new ArrayList<Integer>();
 
-        RBinaryTree<String> root;
-        boolean thereIsAnOperator = false;
+        RBinaryTree<String> root = null;
         int expressionIndex = 1;
         while (expressionIndex < expression.length() - 1) {
             String tmp = expression.substring(expressionIndex, expressionIndex + 1);
 //            System.out.println("entreee");
-            System.out.println(expression);
+            // System.out.println(expression);
             if (ParserToken.isParentheseOuvranteToken(tmp)) {
                 openingParenthese.add(expressionIndex);
-                expression=expression.substring(1);
-                System.out.println("ajout parenthese");
+                expression = expression.substring(1);
+                //System.out.println("ajout parenthese");
 
             } else if (ParserToken.isOperateurToken(tmp)) {
-            	 thereIsAnOperator = true;
                 operateur.add(expressionIndex);
 
                 if ((openingParenthese.size() >= closingParenthese.size())) {
 
-                    root = new LinkedRBinaryTree<String>(null, null, tmp);
-                    System.out.println("Operateur racine = " + tmp);
-                    if (expression.length()  > 1) {
+                    operatorFound = true;
+                    root = new LinkedRBinaryTree<String>( null, null, tmp);
+                    //System.out.println("reation d'un noeu avec la valeur  " + tmp);
+                    if (expression.length() > 1) {
                         root.setLeft(buildChildExpression(expression.substring(0, expressionIndex)));
                         root.setRight(buildChildExpression(expression.substring(expressionIndex, expression.length())));
+                    }else{
+                        System.out.println("Fils non init");
                     }
                 }
 
@@ -111,40 +93,83 @@ public class ExpressionParser {
             } else if (expressionIndex + 3 < expression.length()) {
                 String funString = expression.substring(expressionIndex, expressionIndex + 3);
                 if (ParserToken.isFonctionToken(funString)) {
-                	thereIsAnOperator = true;
+
                     function.add(expressionIndex);
                     root = new LinkedRBinaryTree<String>(null, null, funString);
-                    System.out.println("Operateur racine = " + funString);
 
-                    root.setLeft(buildChildExpression(expression.substring(expressionIndex +3,expression.length()-1)));
+                  //  System.out.println("reation d'un noeu avec la funString  " + funString);
+
+
+                    operatorFound = true;
+                    root.setLeft(buildChildExpression(expression.substring(expressionIndex + 3, expression.length() )));
+                    expressionIndex+=3;
 
                 }
-            }else if (ParserToken.isExposantToken(tmp)) {
-            	 	thereIsAnOperator = true;
-                    root = new LinkedRBinaryTree<String>(null, null, tmp);
-                    System.out.println("Operateur racine = " + tmp);
-                    if (expression.length() - 1 > 1) {
-                        root.setLeft(buildChildExpression(expression.substring(0, expressionIndex )));
-                        root.setRight(buildChildExpression(expression.substring(expressionIndex, expression.length())));
-                    }
+            } else if (ParserToken.isExposantToken(tmp)) {
+                root = new LinkedRBinaryTree<String>( null, null, tmp);
+
+                //System.out.println("reation d'un noeu avec la valeur  " + tmp);
+
+                operatorFound = true;
+                if (expression.length() - 1 > 1) {
+
+
+                    root.setLeft(buildChildExpression(expression.substring(0, expressionIndex)));
+                    root.setRight(buildChildExpression(expression.substring(expressionIndex, expression.length())));
+                }else{
+                  //  System.out.println("Fils non init");
+                }
 
 
             }
-            
-            if (!thereIsAnOperator) {
-            	root = new LinkedRBinaryTree<String>(null, null, expression);
-            }
+
+
+
             expressionIndex++;
-            
         }
 
 
+        if (!operatorFound) {
+            boolean charFind = false;
+            String tmp = expression.substring(1, expression.length());
+            tmp = tmp.replace('(', ' ');
+            tmp = tmp.replace(')', ' ');
+            for (int i = 0; i < tmp.length(); i++) {
+                if (tmp.charAt(i) != ' ') {
+                    charFind = true;
+                }
 
 
 
+            }
+            if (charFind) {
+                root = root = new LinkedRBinaryTree<String>( null, null, tmp);
+                // System.out.println("reation d'un noeu avec la valeur  " + tmp);
+
+            }
+
+           
+        }
 
 
+        System.out.println("retourne un noeu avec la valeure : "+ root.element());
+        return root;
 
-        return null;
     }
+
+     public static void affiche(RBinaryTree<String> noeu){
+         if(noeu!=null){
+             affiche(noeu.leftTree());
+             System.out.println(noeu.element());
+             affiche(noeu.rightTree());
+
+         }
+
+        }
 }
+
+
+
+
+
+

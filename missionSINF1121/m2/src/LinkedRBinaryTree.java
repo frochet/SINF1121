@@ -1,10 +1,15 @@
 public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	
+	/**
+	 *
+	 * @author Florentin
+	 */
+	
 	protected Position<E> root /*, parent*/;
 	protected RBinaryTree<E> leftTree, rightTree;
 	protected E element;
 	
-	public LinkedRBinaryTree(/*Position<E> parent*/ RBinaryTree<E> leftTree, RBinaryTree<E> rightTree, E element){
+	public LinkedRBinaryTree(/*Position<E> parent,*/ RBinaryTree<E> leftTree, RBinaryTree<E> rightTree, E element){
 		this.root = (Position<E>)this;
 		/*this.parent = parent;*/
 		this.leftTree = leftTree;
@@ -63,20 +68,4 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 		this.rightTree= tree;
 	}
 
-/*	@Override
-	public Iterable<Position<E>> positions() {
-		// Classe NodePositionList fournie dans DSAJ-5 section 6.2.4
-		PositionList<Position<E>> positions = new NodePositionList<Position<E>>();
-		if(size() ==0)
-			preorderPositions(root(),positions);
-		return positions;
-		}
-		private void preorderPositions(Position<E> v, PositionList<Position<E>> pos) throws InvalidPositionException{
-		pos.addLast(v);
-		if(this.leftTree.isLeaf())
-			preorderPositions(leftTree().root(),pos);
-		if(this.rightTree.isLeaf())
-			preorderPositions(rightTree().root(),pos);
-	}
-*/
 }

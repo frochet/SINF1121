@@ -1,5 +1,9 @@
 import java.io.File;
 
+/**
+*
+* @author Pierre-Yves
+*/
 
 public class Fichier extends File {
 

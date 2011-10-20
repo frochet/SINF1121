@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package mission2;
 
 /**
  *
@@ -31,7 +30,7 @@ public enum ParserToken {
 
     public static boolean isOperateurToken(String token) {
 
-        if (token.equalsIgnoreCase(ADDITION.symbole) || token.equalsIgnoreCase(SUBTRACTION.symbole) || token.equalsIgnoreCase(MULTIPLICATION.symbole) || token.equalsIgnoreCase(DIVISION.symbole) || token.equalsIgnoreCase(EXPOSANT.symbole)) {
+        if (token.equalsIgnoreCase(ADDITION.symbole) || token.equalsIgnoreCase(SUBTRACTION.symbole) || token.equalsIgnoreCase(MULTIPLICATION.symbole) || token.equalsIgnoreCase(DIVISION.symbole)) {
             return true;
 
         }else{
@@ -46,6 +45,11 @@ public enum ParserToken {
         }else{
             return false;
         }
+    }
+
+    public static boolean isExposantToken(String token){
+        return token.equalsIgnoreCase(EXPOSANT.symbole);
+
     }
 
     public static boolean isParentheseFermanteToken(String token){
@@ -65,6 +69,10 @@ public enum ParserToken {
             return false;
         }
     }
+
+     public static boolean isNumberToken(String token){
+         return true;
+     }
 
 
 }
