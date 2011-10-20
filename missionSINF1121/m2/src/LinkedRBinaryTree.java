@@ -4,7 +4,7 @@ public class LinkedRBinaryTree<E> implements RBinaryTree<E> {
 	protected RBinaryTree<E> leftTree, rightTree;
 	protected E element;
 	
-	public LinkedRBinaryTree(/*Position<E> parent,*/ RBinaryTree<E> leftTree, RBinaryTree<E> rightTree, E element){
+	public LinkedRBinaryTree(/*Position<E> parent*/ RBinaryTree<E> leftTree, RBinaryTree<E> rightTree, E element){
 		this.root = (Position<E>)this;
 		/*this.parent = parent;*/
 		this.leftTree = leftTree;

@@ -96,7 +96,7 @@ public class ExpressionParser {
 
                 if ((openingParenthese.size() >= closingParenthese.size())) {
 
-                    root = new LinkedRBinaryTree<String>(null, null, null, tmp);
+                    root = new LinkedRBinaryTree<String>(null, null, tmp);
                     System.out.println("Operateur racine = " + tmp);
                     if (expression.length()  > 1) {
                         root.setLeft(buildChildExpression(expression.substring(0, expressionIndex)));
@@ -113,7 +113,7 @@ public class ExpressionParser {
                 if (ParserToken.isFonctionToken(funString)) {
                 	thereIsAnOperator = true;
                     function.add(expressionIndex);
-                    root = new LinkedRBinaryTree<String>(null, null, null, funString);
+                    root = new LinkedRBinaryTree<String>(null, null, funString);
                     System.out.println("Operateur racine = " + funString);
 
                     root.setLeft(buildChildExpression(expression.substring(expressionIndex +3,expression.length()-1)));
@@ -121,7 +121,7 @@ public class ExpressionParser {
                 }
             }else if (ParserToken.isExposantToken(tmp)) {
             	 	thereIsAnOperator = true;
-                    root = new LinkedRBinaryTree<String>(null, null, null, tmp);
+                    root = new LinkedRBinaryTree<String>(null, null, tmp);
                     System.out.println("Operateur racine = " + tmp);
                     if (expression.length() - 1 > 1) {
                         root.setLeft(buildChildExpression(expression.substring(0, expressionIndex )));
@@ -132,7 +132,7 @@ public class ExpressionParser {
             }
             
             if (!thereIsAnOperator) {
-            	root = new LinkedRBinaryTree<String>(null, null, null, expression);
+            	root = new LinkedRBinaryTree<String>(null, null, expression);
             }
             expressionIndex++;
             
