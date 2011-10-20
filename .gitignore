@@ -1,2 +1,7 @@
 *.class
+<<<<<<< HEAD
 .metadata
+mission1
+=======
+.metadata
+>>>>>>> parent of 25099fd... Revert "Q5"
