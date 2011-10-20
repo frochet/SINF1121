@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class InOut {
-
+   
 	
 	private String filePathIn;
 	private String filePathOut;

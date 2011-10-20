@@ -39,16 +39,16 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 	
 		if (isLeaf())
 		{
-			if (element().toString()=="x")
+			if (element()=="x")
 			{
 				return new MathTree("1");
 			}
 			
-			else return null
+			else return null;
 		}
 		else
 		{
-			if(element().toString()=="+")
+			if(element()=="+")
 			{			
 				if (((MathTree)leftTree).derive()==null)
 				{
@@ -67,7 +67,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}
 			}
 		
-			else if (element().toString()=="-")
+			else if (element()=="-")
 			{
 				if (((MathTree)rightTree).derive()==null)
 				{
@@ -82,7 +82,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}
 			}
 			
-			else if (this.element().toString()=="*")
+			else if (this.element()=="*")
 			{	
                 if (((MathTree)rightTree).derive()==null & ((MathTree)leftTree).derive()==null)
 				{
@@ -120,7 +120,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}
 			}
 			
-			else if (this.element().toString()=="/")
+			else if (this.element()=="/")
 			{
                 if (((MathTree)(leftTree)).derive()==null)
                 {
@@ -174,7 +174,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 			}
 			
 			
-			else if (this.element().toString()=="sin")
+			else if (this.element()=="sin")
 			{
 				if (((MathTree)(rightTree)).derive()==null)
 				{
@@ -195,7 +195,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}								
 			}
 			
-			else if (this.element().toString()=="cos")
+			else if (this.element()=="cos")
 			{
 				if (((MathTree)(rightTree)).derive()==null)
 				{
@@ -219,7 +219,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 				}
 			}
 			
-			else if (this.element().toString()=="^") //A modifier
+			else if (this.element()=="^") //A modifier
 			{
 				return new MathTree(
 						rightTree,
