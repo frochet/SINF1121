@@ -20,7 +20,7 @@ public class ExpressionParser {
 
     public ExpressionParser() {
     	
-    	in = new InOut("C:\\Users\\Pierre-Yves\\SINF1121\\mission1SINF1121\\mission1\\test\\test.txt", "C:\\Users\\Pierre-Yves\\SINF1121\\mission1SINF1121\\mission1\\test\\test2.txt");
+    	in = new InOut("expressions.txt", "test2.txt");
     	in.init();
         while((expression = in.readLine())!=null){
     	this.expression = expression;

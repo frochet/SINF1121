@@ -18,9 +18,7 @@ public class MathTree extends LinkedRBinaryTree<String> implements FormalExpress
 	@Override
 	public String toString(){	
 		if (leftTree==null & rightTree==null)
-		{
 			return element;
-		}
 	
 		else if (leftTree==null)
 		{
