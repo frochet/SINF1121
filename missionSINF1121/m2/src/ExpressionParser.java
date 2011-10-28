@@ -37,12 +37,6 @@ public class ExpressionParser {
         return expressionTree;
     }
 
-   
-
-    @Override
-    public String toString() {
-        return " finiii";
-    }
 
     private RBinaryTree<String> buildChildExpression(String expression) {
 
@@ -117,7 +111,7 @@ public class ExpressionParser {
                     root.setLeft(buildChildExpression(expression.substring(0, expressionIndex)));
                     root.setRight(buildChildExpression(expression.substring(expressionIndex, expression.length())));
                 }else{
-                  //  System.out.println("Fils non init");
+                  // System.out.println("Fils non init");
                 }
 
 
@@ -143,7 +137,7 @@ public class ExpressionParser {
 
             }
             if (charFind) {
-                root = root = new LinkedRBinaryTree<String>( null, null, tmp);
+                root = new LinkedRBinaryTree<String>( null, null, tmp);
                 // System.out.println("reation d'un noeu avec la valeur  " + tmp);
 
             }
@@ -152,7 +146,7 @@ public class ExpressionParser {
         }
 
 
-        System.out.println("retourne un noeu avec la valeure : "+ root.element());
+        //System.out.println("retourne un noeud avec la valeure : "+ root.element());
         return root;
 
     }
@@ -164,8 +158,7 @@ public class ExpressionParser {
              affiche(noeu.rightTree());
 
          }
-
-        }
+     }
 }
 
 
