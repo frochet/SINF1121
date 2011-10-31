@@ -3,8 +3,6 @@
  * and open the template in the editor.
  */
 
-package mission3;
-
 /**
  *Classe InOutException
  * @author Abdel
