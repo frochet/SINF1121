@@ -18,7 +18,7 @@ public class Main {
         Revue tmp=null;
         String[] informations = argument.split(",");
         if (informations.length >= 2) {
-            tmp = new Revue(informations[0], informations[1]);
+            tmp = new Revue(informations[0], informations[1].toUpperCase());
             if (informations.length == 3) {
                 tmp.setFor1(informations[2]);
             } else if (informations.length == 4) {
@@ -92,7 +92,7 @@ public class Main {
                     System.out.println("Type a review name to access the informations or exit to leave.");
                     cmd = clavierIn.nextLine();
                     if(!cmd.equals("exit")){
-                        Revue tmp=librairy.get(cmd);
+                        Revue tmp=librairy.get(cmd.toUpperCase());
                         if(tmp==null){
                             System.out.println("la revue "+cmd+" n'existe pas dans la base de donnée");
                         }else{
