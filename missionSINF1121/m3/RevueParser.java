@@ -12,14 +12,14 @@ public class RevueParser {
 
 	public RevueParser(String filePathIn){
 		this.filePathIn = filePathIn;
-		this.handler = new InOut();
+		this.handler = new InOut(filePathIn,"");
 		map = new HashMap<String,Revue>();
 	}
 	
 	public void start(){
 		try {
             // TODO code application logic here
-            handler.setReader(this.filePathIn);
+            handler.initReader();
             String line = handler.readLine();
 
             if (line.equals("Rank,Title,FoR1,FoR1 Name,FoR2,FoR2 Name,FoR3,FoR3 Name")) {
@@ -32,6 +32,7 @@ public class RevueParser {
 	                    map.put(revueRead.getTitle(), revueRead);
                 	}
                 }
+                handler.closeReader();
             } else {
                 System.out.println("Entete du fichier incorrecte! Veuillez verifier le fichier de donnée et recommencer.");
             }

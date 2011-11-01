@@ -35,24 +35,6 @@ public class InOut {
 
     }
 
-    /*
-    public void init() {
-
-        try {
-            this.fr = new FileReader(this.filePathIn);
-            this.bf = new BufferedReader(fr);
-            fw = new FileWriter(this.filePathOut);
-            bw = new BufferedWriter(fw);
-
-        } catch (FileNotFoundException e) {
-            System.out.println("Impossible de trouver le fichier" + this.filePathIn);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-     *
-     */
 
     public void initReader() {
         try {
@@ -111,37 +93,14 @@ public class InOut {
 
     }
 
-    public void setReader(String filePathIn){
-        if(bf!=null){
-            closeReader();
-        }
-        this.filePathIn=filePathIn;
-        this.initReader();
-
-    }
-
-    public void setWriter(String filePathOut){
-        if(bw!=null){
-            this.closeWriter();
-        }
-        this.filePathOut=filePathOut;
-        this.initWriter();
-    }
-
     public boolean isEndOfFile() {
-        if(bf==null){
-            return true;
-        }else{
-
-        return endOfFile;
-        }
+    	return endOfFile;
     }
 
 
     public void closeReader() {
         try {
             this.bf.close();
-            this.bf=null;
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
