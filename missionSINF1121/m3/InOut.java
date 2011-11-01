@@ -6,7 +6,7 @@
 
 /**
  *
- * @author Abdel
+ * @author Florentin,Abdel,Pierre-Yves
  */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -32,10 +32,6 @@ public class InOut {
     }
 
     public InOut() {
-        fr=null;
-        bf=null;
-        fw=null;
-        bw=null;
 
     }
 

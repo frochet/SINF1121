@@ -3,7 +3,7 @@ public class Revue {
     //Les différents champs de chaque revue
 
     private String rank="";
-    private String title="";
+	private String title="";
     private String for1="";
     private String for1Name="";
     private String for2="";
@@ -21,69 +21,21 @@ public class Revue {
         this.title = title;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getFor1() {
-        return for1;
-    }
+    public Revue() {
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
-     *
-     * @return
-     */
-    public String getFor2() {
-        return for2;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFor1Name() {
-        return for1Name;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFor2Name() {
-        return for2Name;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFor3() {
-        return for3;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getFor3Name() {
-        return for3Name;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public String getRank() {
-        return rank;
-    }
-
-    /**
-     *
-     * @return
-     */
     public String getTitle() {
         return title;
     }
+    
+    public void setRank(String rank) {
+		this.rank = rank;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
     /**
      *
@@ -132,7 +84,19 @@ public class Revue {
     public void setFor3Name(String for3Name) {
         this.for3Name = for3Name;
     }
-
+    
+    public void setValue(String value, int code){
+    	switch (code){
+    	case 0 : setRank(value);
+    	case 1 : setTitle(value);
+    	case 2 : setFor1(value);
+    	case 3 : setFor1Name(value);
+    	case 4 : setFor2(value);
+    	case 5 : setFor2Name(value);
+    	case 6 : setFor3(value);
+    	case 7 : setFor3Name(value);
+    	}
+    }
     @Override
     public String toString() {
 
