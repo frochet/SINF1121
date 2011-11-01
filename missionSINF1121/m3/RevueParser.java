@@ -29,7 +29,8 @@ public class RevueParser {
                 	if(line == null) break;
                 	else{
 	                    Revue revueRead=constructRevue(line);
-	                    map.put(revueRead.getTitle(), revueRead);
+	                    map.put(revueRead.getTitle().toUpperCase(), revueRead);
+	                    //L'enregistrement de la clé sous forme majuscule prend son sens lors de la recherche.
                 	}
                 }
                 handler.closeReader();
@@ -51,7 +52,13 @@ public class RevueParser {
              System.out.println("Type a review name to access the informations or exit to leave.");
              cmd = clavierIn.nextLine();
              if(!cmd.equals("exit")){
-                 Revue tmp=map.get(cmd);
+                 Revue tmp=map.get(cmd.toUpperCase());
+                 
+                 /*
+                 * Le fait de mettre le string entré en majuscule nous permet de rechercher la revue correspondante
+                 * peu importe la manière dont l'utilisateur la entrée; qu'il y ait ou non des majuscules, minuscules, etc
+                 */
+                 
                  if(tmp==null){
                      System.out.println("la revue "+cmd+" n'existe pas dans la base de donnée");
                  }else{
