@@ -28,7 +28,7 @@ public class RevueParser {
                 	line = handler.readLine();
                 	if(line == null) break;
                 	else{
-	                    Revue revueRead=constructRevue(handler.readLine());
+	                    Revue revueRead=constructRevue(line);
 	                    map.put(revueRead.getTitle(), revueRead);
                 	}
                 }
