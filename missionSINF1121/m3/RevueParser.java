@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 // WORKING IN PROGRESS
 public class RevueParser {
-	
+	//Auteur : Florentin,Abdel
 	private String filePathIn;
 	private InOut handler;
 	private HashMap<String,Revue> map;

@@ -1,7 +1,7 @@
 
 public class Revue {
     //Les différents champs de chaque revue
-
+	// Florentin,Abdel,Claude
     private String rank="";
 	private String title="";
     private String for1="";
