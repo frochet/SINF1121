@@ -68,10 +68,11 @@ public class RevueParser {
 		for(i = 0; i<tab.length; i++){
 			revue.setValue(tab[i],i);
 		}
+		
 		if(i<7){
 			do{
-				i++;
 				revue.setValue("", i);
+				i++;
 			}while(i<7);
 		}
 		return revue;
