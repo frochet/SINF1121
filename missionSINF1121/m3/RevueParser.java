@@ -51,7 +51,7 @@ public class RevueParser {
              System.out.println("Type a review name to access the informations or exit to leave.");
              cmd = clavierIn.nextLine();
              if(!cmd.equals("exit")){
-                 Revue tmp=map.get(cmd.toUpperCase());
+                 Revue tmp=map.get(cmd);
                  if(tmp==null){
                      System.out.println("la revue "+cmd+" n'existe pas dans la base de donnée");
                  }else{
