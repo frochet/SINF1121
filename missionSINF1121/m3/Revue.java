@@ -19,7 +19,6 @@ public class Revue {
     public Revue(String rank, String title) {
         this.rank = rank;
         this.title = title;
-
     }
 
     /**
