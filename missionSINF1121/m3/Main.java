@@ -18,7 +18,7 @@ public class Main {
         Revue tmp=null;
         String[] informations = argument.split(",");
         if (informations.length >= 2) {
-            tmp = new Revue(informations[0], informations[1].toUpperCase());
+            tmp = new Revue(informations[0], informations[1]);
             if (informations.length == 3) {
                 tmp.setFor1(informations[2]);
             } else if (informations.length == 4) {
@@ -83,7 +83,7 @@ public class Main {
                     
                 }
                 for ( Revue e  : revueListe){
-                    librairy.put(e.getTitle(), e);
+                    librairy.put(e.getTitle().toUpperCase(), e);
                 }
 
 
