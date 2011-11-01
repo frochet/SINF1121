@@ -58,24 +58,21 @@ public class InOut {
 
     public String readLine() throws InOutException {
 
-        if(fr==null || bf==null){
-            throw  new InOutException("Reader is not initialized");
-        }else {
-             String line = "";
-        try {
-            while ((line = bf.readLine()) != null) {
-                // Comment a appel du parser ?? Jamais !
-                return line;
-            }
-            endOfFile=true;
+    	if(fr==null || bf==null)
+    		throw  new InOutException("Reader is not initialized");
+    	else{
+    		String line = "";
+    		try {
+    			while ((line = bf.readLine()) != null) {
+    				return line;
+    			}
+    			endOfFile=true;
 
-        } catch (IOException e) {
-            System.out.println("Impossible de lire : " + line);
-        }
-        return null;
-
-        }
-       
+    		} catch (IOException e) {
+    			System.out.println("Impossible de lire : " + line);
+    		}
+    		return null;
+    	}
     }
 
     public void write(String s) throws InOutException {
