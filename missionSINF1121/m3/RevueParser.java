@@ -10,12 +10,21 @@ public class RevueParser {
 	private InOut handler;
 	private HashMap<String,Revue> map;
 
+	/**
+	*Create a new instance of a Revue Parser
+	*@param filePathIn path of the file wich contains the informations of all the books
+	*
+	*/
 	public RevueParser(String filePathIn){
 		this.filePathIn = filePathIn;
 		this.handler = new InOut(filePathIn,"");
 		map = new HashMap<String,Revue>();
 	}
 	
+	/**
+	*fulfil the books informations
+	*
+	*/
 	public void start(){
 		try {
             // TODO code application logic here
@@ -45,6 +54,11 @@ public class RevueParser {
         }
     
 	}
+	
+	/**
+	*Principal method to retrieve the book's informations
+	*
+	*/
 	public void commandLine(){
 		 Scanner clavierIn = new Scanner(System.in);
          String cmd = "";
@@ -68,7 +82,7 @@ public class RevueParser {
          }
 
 	}
-	public Revue constructRevue(String line){
+	private Revue constructRevue(String line){
 		String[] tab = line.split(",");
 		Revue revue = new Revue();
 		int i;

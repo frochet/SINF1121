@@ -5,7 +5,7 @@
 
 
 /**
- *
+ *Class InOut
  * @author Florentin,Abdel,Pierre-Yves
  */
 import java.io.BufferedReader;
@@ -25,15 +25,24 @@ public class InOut {
     private BufferedWriter bw;
     private boolean endOfFile;
 
+	/**
+	*Create a new instance of InOut
+	*
+	*/
     public InOut(String filePathIn, String filePathOut) {
         this.filePathIn = filePathIn;
         this.filePathOut = filePathOut;
 
     }
 
+	/**
+	*Create a new instance of InOut
+	*
+	*/
     public InOut() {
 
     }
+
 
 
     public void initReader() {
