@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 // WORKING IN PROGRESS
 public class RevueParser {
-	
+	//Auteur : Florentin,Abdel
 	private String filePathIn;
 	private InOut handler;
 	private HashMap<String,Revue> map;
@@ -23,13 +23,15 @@ public class RevueParser {
             String line = handler.readLine();
 
             if (line.equals("Rank,Title,FoR1,FoR1 Name,FoR2,FoR2 Name,FoR3,FoR3 Name")) {
+            	System.out.println("Welcome to the librairy application.");
                 System.out.println("Wait for the application init....");
                 while (!handler.isEndOfFile()) {
                 	line = handler.readLine();
                 	if(line == null) break;
                 	else{
-	                    Revue revueRead=constructRevue(handler.readLine());
-	                    map.put(revueRead.getTitle(), revueRead);
+	                    Revue revueRead=constructRevue(line);
+	                    map.put(revueRead.getTitle().toUpperCase(), revueRead);
+	                    //L'enregistrement de la clé sous forme majuscule prend son sens lors de la recherche.
                 	}
                 }
                 handler.closeReader();
@@ -47,11 +49,16 @@ public class RevueParser {
 		 Scanner clavierIn = new Scanner(System.in);
          String cmd = "";
          while (!cmd.equals("exit")) {
-             System.out.println("Welcome to the librairy application.");
              System.out.println("Type a review name to access the informations or exit to leave.");
              cmd = clavierIn.nextLine();
              if(!cmd.equals("exit")){
-                 Revue tmp=map.get(cmd);
+                 Revue tmp=map.get(cmd.toUpperCase());
+                 
+                 /*
+                 * Le fait de mettre le string entré en majuscule nous permet de rechercher la revue correspondante
+                 * peu importe la manière dont l'utilisateur la entrée; qu'il y ait ou non des majuscules, minuscules, etc
+                 */
+                 
                  if(tmp==null){
                      System.out.println("la revue "+cmd+" n'existe pas dans la base de donnée");
                  }else{

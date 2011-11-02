@@ -1,7 +1,7 @@
 
 public class Revue {
     //Les différents champs de chaque revue
-
+	// Florentin,Abdel,Claude
     private String rank="";
 	private String title="";
     private String for1="";
@@ -87,14 +87,14 @@ public class Revue {
     
     public void setValue(String value, int code){
     	switch (code){
-    	case 0 : setRank(value);
-    	case 1 : setTitle(value);
-    	case 2 : setFor1(value);
-    	case 3 : setFor1Name(value);
-    	case 4 : setFor2(value);
-    	case 5 : setFor2Name(value);
-    	case 6 : setFor3(value);
-    	case 7 : setFor3Name(value);
+    	case 0 : setRank(value); break;
+    	case 1 : setTitle(value); break;
+    	case 2 : setFor1(value); break;
+    	case 3 : setFor1Name(value); break;
+    	case 4 : setFor2(value); break;
+    	case 5 : setFor2Name(value); break;
+    	case 6 : setFor3(value); break;
+    	case 7 : setFor3Name(value); break;
     	}
     }
     @Override
