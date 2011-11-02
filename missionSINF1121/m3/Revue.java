@@ -38,7 +38,7 @@ public class Revue {
 	}
 
     /**
-     *
+     *Set for1 field of the revue
      * @param for1
      */
     public void setFor1(String for1) {
