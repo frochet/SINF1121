@@ -46,6 +46,14 @@ public class Revue {
         return rank;
     }
     /**
+	*Return the field for1 of the Revue
+	*@return field for1 of the revue
+	*
+	*/
+    public String getFor1() {
+        return for1;
+    }
+    /**
 	*Set the Rank of the Revue
 	*@param rank of the revue
 	*/

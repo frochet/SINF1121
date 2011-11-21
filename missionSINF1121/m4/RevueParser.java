@@ -10,12 +10,11 @@ public class RevueParser {
 	private String filePathIn;
 	private InOut handler;
 	private HashMap<String,Revue> map; //Permet de rechercher une revue
+	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainTitre; //Stocke tous les domaines et y associe des SkipList contenant les revues triés par ordre alphabétique
+	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainRang; //Stocke tous les domaines et y associe des SkipList contenant les revues triés par rang
 	private ConcurrentSkipListMap<String,Revue> map2; //Permet de lister toutes les revues triées par ordre alphabétique
-	private ConcurrentSkipListMap<String,Revue> map3; //Permet de lister les revues d'un domaine triées par ordre alphabétique
-	private ConcurrentSkipListMap<Integer,Revue> map4; //Permet de lister les revues d'un domaine triées par rang
-	private ConcurrentSkipListMap<Integer,Revue> map5; //Permet de lister toutes les revues triées par rang
-	private AlphaComp alphacomp;
-	private NumComp numcomp;
+	private ConcurrentSkipListMap<String,Revue> map3; //Permet de lister toutes les revues triées par rang
+
 
 	/**
 	*Create a new instance of a Revue Parser
@@ -26,14 +25,11 @@ public class RevueParser {
 		this.filePathIn = filePathIn;
 		this.handler = new InOut(filePathIn,"");
 		
-		alphacomp = new AlphaComp();
-		numcomp = new NumComp();
-		
 		map = new HashMap<String,Revue>();
-		map2 = new ConcurrentSkipListMap<String,Revue>(alphacomp);
-		map3 = new ConcurrentSkipListMap<String,Revue>(alphacomp);
-		map4 = new ConcurrentSkipListMap<Integer,Revue>(numcomp);
-		map5 = new ConcurrentSkipListMap<Integer,Revue>(numcomp);
+		domainTitre = new HashMap<String,ConcurrentSkipListMap<String,Revue>>();
+		domainRang = new HashMap<String,ConcurrentSkipListMap<String,Revue>>();
+		map2 = new ConcurrentSkipListMap<String,Revue>();
+		map3 = new ConcurrentSkipListMap<String,Revue>();
 	}
 	
 	/**
@@ -55,10 +51,31 @@ public class RevueParser {
                 	else{
 	                    Revue revueRead=constructRevue(line);
 	                    map.put(revueRead.getTitle().toUpperCase(), revueRead);
+	                    
+	                    //Tri par domaine, ordre alphabétique
+	                    if(domainTitre.get(revueRead.getFor1())==null){
+	                    	domainTitre.put(revueRead.getFor1(), new ConcurrentSkipListMap<String,Revue>());
+	                    	domainTitre.get(revueRead.getFor1()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
+	                    }
+	                    else {
+	                    	domainTitre.get(revueRead.getFor1()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
+	                    }
+	                    
+	                  //Tri par domaine, ordre numérique
+	                    if(domainRang.get(revueRead.getFor1())==null){
+	                    	domainRang.put(revueRead.getFor1(), new ConcurrentSkipListMap<String,Revue>());
+	                    	domainRang.get(revueRead.getFor1()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
+	                    }
+	                    else {
+	                    	domainRang.get(revueRead.getFor1()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
+	                    }
+	                    
+	                    //Tri de toutes les revues, ordre alphabétique
 	                    map2.put(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
-	                    map3.put(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
-	                    map4.put(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
-	                    map5.put(revueRead.getRank().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
+	                    
+	                  //Tri de toutes les revues, ordre numérique
+	                    map3.put(revueRead.getRank(), map.get(revueRead.getTitle().toUpperCase()));
+
 	                    
 	                    //L'enregistrement de la clÃ© sous forme majuscule prend son sens lors de la recherche.
                 	}
