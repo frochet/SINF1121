@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 // WORKING IN PROGRESS
 public class RevueParser {
-	//Auteur : Florentin,Abdel
+	//Auteur : Florentin,Abdel,Claude
 	private String filePathIn;
 	private InOut handler;
 	private HashMap<String,Revue> map;
@@ -62,25 +62,100 @@ public class RevueParser {
 	public void commandLine(){
 		 Scanner clavierIn = new Scanner(System.in);
          String cmd = "";
-         while (!cmd.equals("exit")) {
-             System.out.println("Type a review name to access the informations or exit to leave.");
-             cmd = clavierIn.nextLine();
-             if(!cmd.equals("exit")){
-                 Revue tmp=map.get(cmd.toUpperCase());
-                 
-                 /*
-                 * Le fait de mettre le string entré en majuscule nous permet de rechercher la revue correspondante
-                 * peu importe la manière dont l'utilisateur la entrée; qu'il y ait ou non des majuscules, minuscules, etc
-                 */
-                 
-                 if(tmp==null){
-                     System.out.println("la revue "+cmd+" n'existe pas dans la base de donnée");
-                 }else{
-                     System.out.println(tmp);
-                 }
-             }
+         
+         while (!cmd.equals("EXIT")) {
+        	 System.out.println("");
+        	 System.out.println("What do you want to do?");
+        	 System.out.println("Type SEARCH to search a revue in the database");
+        	 System.out.println("Type LIST to list revue in the database");
+        	 System.out.println("Type EXIT to exit");
+        	 cmd = clavierIn.nextLine();
+        	 cmd = cmd.toUpperCase();
+        			
+        	 if(cmd.equals("SEARCH")){
+        		 System.out.println("");
+        		 System.out.println("Type the revue name you want to search in the database");
+        		 String cmd2 = "";
+        		 cmd2 = clavierIn.nextLine();
+            	 cmd2 = cmd2.toUpperCase();
+        		 Revue tmp=map.get(cmd2);
+        	                 
+	             /*
+	             * Le fait de mettre le string entré en majuscule nous permet de rechercher la revue correspondante
+	             * peu importe la manière dont l'utilisateur la entrée; qu'il y ait ou non des majuscules, minuscules, etc
+	             */
+        	                 
+	             if(tmp==null){
+	                 System.out.println("la revue "+cmd2+" n'existe pas dans la base de donnée");
+	             }
+	             else{
+	                 System.out.println(tmp);
+	             }
+              }
+        	 
+        	 if(cmd.equals("LIST")){
+        		 String cmd2 = "";
+        		 while (!cmd2.equals("BACK")) {
+        			 System.out.println("");
+        			 System.out.println("What do you want to list?");
+	        		 System.out.println("Type ALL to list revue in the complete database");
+	        		 System.out.println("Type FIELD to list revue from a certain field of research");
+	        		 System.out.println("Type BACK to go back to the main menu"); 
+	        		 cmd2 = clavierIn.nextLine();
+	            	 cmd2 = cmd2.toUpperCase();
+	            	 
+	            	 if (cmd2.equals("ALL")) {
+	            		 String cmd3 = "";
+	            		 while(!cmd3.equals("BACK")){
+	            			 System.out.println("");
+	            			 System.out.println("In which order do you want to list revues?");
+		            		 System.out.println("Type ALPHA for revues sorted by alphabetical order");
+		            		 System.out.println("Type RANK for revues sorted by rank");
+		            		 System.out.println("Type BACK to go back to the previous menu");
+		            		 cmd3 = clavierIn.nextLine();
+		                	 cmd3 = cmd3.toUpperCase();
+		            		 
+		            		 if(cmd3.equals("ALPHA")){
+		            			 System.out.println("This feature is not yet available");
+		            		 }
+		            		 
+		            		 if(cmd3.equals("RANK")){
+		            			 System.out.println("This feature is not yet available");
+		            		 }
+	            		 }
+	            	 }
+	            	 
+	            	 if (cmd2.equals("FIELD")) {	            		 
+	            		 String cmd3 = "";
+	            		 while(!cmd3.equals("BACK")){
+	            			 System.out.println("");
+	            			 System.out.println("In which order do you want to list revues?");
+		            		 System.out.println("Type ALPHA for revues sorted by alphabetical order");
+		            		 System.out.println("Type RANK for revues sorted by rank");
+		            		 System.out.println("Type BACK to go back to the previous menu");
+		            		 cmd3 = clavierIn.nextLine();
+		                	 cmd3 = cmd3.toUpperCase();
+		            		 
+		            		 if(cmd3.equals("ALPHA")){
+		            			 System.out.println("Type the field of research from which you want to list revue");
+			            		 String cmd4 = "";
+			            		 cmd4 = clavierIn.nextLine();
+			                	 cmd4 = cmd4.toUpperCase();
+			                	 System.out.println("This feature is not yet available");
+		            		 }
+		            		 
+		            		 if(cmd3.equals("RANK")){
+		            			 System.out.println("Type the field of research from which you want to list revue");
+			            		 String cmd4 = "";
+			            		 cmd4 = clavierIn.nextLine();
+			                	 cmd4 = cmd4.toUpperCase();
+			                	 System.out.println("This feature is not yet available");
+		            		 }
+	            		 }
+	            	 }   	 
+        		 }
+        	 }  	 
          }
-
 	}
 	private Revue constructRevue(String line){
 		String[] tab = line.split(",");
