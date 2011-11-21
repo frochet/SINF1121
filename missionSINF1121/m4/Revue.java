@@ -38,6 +38,14 @@ public class Revue {
         return title;
     }
     /**
+	*Return the Rank of the Revue
+	*@return Rank of the revue
+	*
+	*/
+    public String getRank() {
+        return rank;
+    }
+    /**
 	*Set the Rank of the Revue
 	*@param rank of the revue
 	*/

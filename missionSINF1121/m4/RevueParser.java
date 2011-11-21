@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,7 +9,13 @@ public class RevueParser {
 	//Auteur : Florentin,Abdel,Claude
 	private String filePathIn;
 	private InOut handler;
-	private HashMap<String,Revue> map;
+	private HashMap<String,Revue> map; //Permet de rechercher une revue
+	private ConcurrentSkipListMap<String,Revue> map2; //Permet de lister toutes les revues triées par ordre alphabétique
+	private ConcurrentSkipListMap<String,Revue> map3; //Permet de lister les revues d'un domaine triées par ordre alphabétique
+	private ConcurrentSkipListMap<Integer,Revue> map4; //Permet de lister les revues d'un domaine triées par rang
+	private ConcurrentSkipListMap<Integer,Revue> map5; //Permet de lister toutes les revues triées par rang
+	private AlphaComp alphacomp;
+	private NumComp numcomp;
 
 	/**
 	*Create a new instance of a Revue Parser
@@ -18,7 +25,15 @@ public class RevueParser {
 	public RevueParser(String filePathIn){
 		this.filePathIn = filePathIn;
 		this.handler = new InOut(filePathIn,"");
+		
+		alphacomp = new AlphaComp();
+		numcomp = new NumComp();
+		
 		map = new HashMap<String,Revue>();
+		map2 = new ConcurrentSkipListMap<String,Revue>(alphacomp);
+		map3 = new ConcurrentSkipListMap<String,Revue>(alphacomp);
+		map4 = new ConcurrentSkipListMap<Integer,Revue>(numcomp);
+		map5 = new ConcurrentSkipListMap<Integer,Revue>(numcomp);
 	}
 	
 	/**
@@ -40,6 +55,11 @@ public class RevueParser {
                 	else{
 	                    Revue revueRead=constructRevue(line);
 	                    map.put(revueRead.getTitle().toUpperCase(), revueRead);
+	                    map2.put(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
+	                    map3.put(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
+	                    map4.put(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
+	                    map5.put(revueRead.getRank().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
+	                    
 	                    //L'enregistrement de la clÃ© sous forme majuscule prend son sens lors de la recherche.
                 	}
                 }
