@@ -10,10 +10,11 @@ public class RevueParser {
 	private String filePathIn;
 	private InOut handler;
 	private HashMap<String,Revue> map; //Permet de rechercher une revue
-	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainTitre; //Stocke tous les domaines et y associe des SkipList contenant les revues triés par ordre alphabétique
-	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainRang; //Stocke tous les domaines et y associe des SkipList contenant les revues triés par rang
-	private ConcurrentSkipListMap<String,Revue> map2; //Permet de lister toutes les revues triées par ordre alphabétique
-	private ConcurrentSkipListMap<String,Revue> map3; //Permet de lister toutes les revues triées par rang
+	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainTitre; //Stocke tous les domaines et y associe des SkipList contenant les revues triï¿½s par ordre alphabï¿½tique
+	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainRang; //Stocke tous les domaines et y associe des SkipList contenant les revues triï¿½s par rang
+	private ConcurrentSkipListMap<String,Revue> map2; //Permet de lister toutes les revues triï¿½es par ordre alphabï¿½tique
+	private ConcurrentSkipListMap<String,Revue> map3; //Permet de lister toutes les revues triï¿½es par rang
+        private AvlTree<Revue> dico;
 
 
 	/**
@@ -30,6 +31,7 @@ public class RevueParser {
 		domainRang = new HashMap<String,ConcurrentSkipListMap<String,Revue>>();
 		map2 = new ConcurrentSkipListMap<String,Revue>();
 		map3 = new ConcurrentSkipListMap<String,Revue>();
+                dico=new AvlTree<Revue>();
 	}
 	
 	/**
@@ -51,8 +53,10 @@ public class RevueParser {
                 	else{
 	                    Revue revueRead=constructRevue(line);
 	                    map.put(revueRead.getTitle().toUpperCase(), revueRead);
+                            dico.insert(revueRead.getTitle(), revueRead);
+
 	                    
-	                    //Tri par domaine, ordre alphabétique
+	                    //Tri par domaine, ordre alphabï¿½tique
 	                    if(domainTitre.get(revueRead.getFor1())==null){
 	                    	domainTitre.put(revueRead.getFor1(), new ConcurrentSkipListMap<String,Revue>());
 	                    	domainTitre.get(revueRead.getFor1()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
@@ -61,7 +65,7 @@ public class RevueParser {
 	                    	domainTitre.get(revueRead.getFor1()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
 	                    }
 	                    
-	                  //Tri par domaine, ordre numérique
+	                  //Tri par domaine, ordre numï¿½rique
 	                    if(domainRang.get(revueRead.getFor1())==null){
 	                    	domainRang.put(revueRead.getFor1(), new ConcurrentSkipListMap<String,Revue>());
 	                    	domainRang.get(revueRead.getFor1()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
@@ -70,10 +74,10 @@ public class RevueParser {
 	                    	domainRang.get(revueRead.getFor1()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
 	                    }
 	                    
-	                    //Tri de toutes les revues, ordre alphabétique
+	                    //Tri de toutes les revues, ordre alphabï¿½tique
 	                    map2.put(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
 	                    
-	                  //Tri de toutes les revues, ordre numérique
+	                  //Tri de toutes les revues, ordre numï¿½rique
 	                    map3.put(revueRead.getRank(), map.get(revueRead.getTitle().toUpperCase()));
 
 	                    
@@ -101,6 +105,7 @@ public class RevueParser {
          String cmd = "";
          
          while (!cmd.equals("EXIT")) {
+             dico.printTree();
         	 System.out.println("");
         	 System.out.println("What do you want to do?");
         	 System.out.println("Type SEARCH to search a revue in the database");
