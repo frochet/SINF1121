@@ -3,12 +3,13 @@
    
     /**
      * Class AVLtree
+     * @param <K>
      */
-    public class AvlTree<E>
+    public class AvlTree<E, K>
     {
 
           /** The tree root. */
-        private AvlNode<E> root;
+        private AvlNode<E, K> root;
         /**
          * Create a new isntance of the AVLTree
          */
@@ -23,7 +24,7 @@
         * @param x
         * @param obj
         */
-        public void insert( Comparable x,E obj )
+        public void insert( K x,E obj )
         {
             root = insert( x,obj, root );
         }
@@ -32,7 +33,7 @@
          *
          * @param x
          */
-        public void remove( Comparable x )
+        public void remove( K x )
         {
            
         }
@@ -41,7 +42,7 @@
         *
         * @return
         */
-        public Comparable findMin( )
+        public K findMin( )
         {
             return elementAt( findMin( root ) );
         }
@@ -50,7 +51,7 @@
          *
          * @return
          */
-        public Comparable findMax( )
+        public K findMax( )
         {
             return elementAt( findMax( root ) );
         }
@@ -60,7 +61,7 @@
         * @param x
         * @return
         */
-        public Comparable find( Comparable x )
+        public K find( K x )
         {
             return elementAt( find( x, root ) );
         }
@@ -92,7 +93,7 @@
         * @param t
         * @return
         */
-        private Comparable elementAt( AvlNode t )
+        private K elementAt( AvlNode<E,K> t )
         {
             return t == null ? null : t.getElement();
         }
@@ -104,10 +105,10 @@
          * @param t
          * @return
          */
-        private AvlNode insert( Comparable x,E obj, AvlNode t )
+        private AvlNode<E, K> insert( K x,E obj, AvlNode<E, K> t )
         {
             if( t == null )
-                t = new AvlNode( x,obj, null, null );
+                t = new AvlNode<E,K>( x,obj, null, null );
             else if( x.compareTo( t.getElement() ) < 0 )
             {
                 t.setLeft(insert( x,obj, t.getLeft() ));
@@ -137,7 +138,7 @@
          * @param t
          * @return
          */
-        private AvlNode findMin( AvlNode t )
+        private AvlNode<E, K> findMin( AvlNode<E, K> t )
         {
             if( t == null )
                 return t;
@@ -152,7 +153,7 @@
          * @param t
          * @return
          */
-        private AvlNode findMax( AvlNode t )
+        private AvlNode<E, K> findMax( AvlNode<E, K> t )
         {
             if( t == null )
                 return t;
@@ -168,7 +169,7 @@
          * @param t
          * @return
          */
-        private AvlNode find( Comparable x, AvlNode t )
+        private AvlNode<E, K> find( K x, AvlNode<E, K> t )
         {
             while( t != null )
                 if( x.compareTo( t.getElement() ) < 0 )
@@ -185,7 +186,7 @@
          *
          * @param t
          */
-        private void printTree( AvlNode t )
+        private void printTree( AvlNode<E, K> t )
         {
             if( t != null )
             {
@@ -198,7 +199,7 @@
         /**
          * Return the height of node t, or -1, if null.
          */
-        private static int height( AvlNode t )
+        private  int height( AvlNode<E, K> t )
         {
             return t == null ? -1 : t.getHeight();
         }
@@ -216,9 +217,9 @@
        * @param k2
        * @return
        */
-        private static AvlNode rotateWithLeftChild( AvlNode k2 )
+        private AvlNode<E, K> rotateWithLeftChild( AvlNode<E, K> k2 )
         {
-            AvlNode k1 = k2.getLeft();
+            AvlNode<E, K> k1 = k2.getLeft();
             k2.setLeft(k1.getRight());
             k1.setRight(k2);
             k2.setHeight( max( height( k2.getLeft() ), height( k2.getRight() ) ) + 1);
@@ -231,9 +232,9 @@
          * @param k1
          * @return
          */
-        private static AvlNode rotateWithRightChild( AvlNode k1 )
+        private AvlNode<E, K> rotateWithRightChild( AvlNode<E, K> k1 )
         {
-            AvlNode k2 = k1.getRight();
+            AvlNode<E, K> k2 = k1.getRight();
             k1.setRight( k2.getLeft());
             k2.setLeft( k1);
             k1.setHeight( max( height( k1.getLeft() ), height( k1.getRight() ) ) + 1);
@@ -246,7 +247,7 @@
          * @param k3
          * @return
          */
-        private static AvlNode doubleWithLeftChild( AvlNode k3 )
+        private AvlNode<E, K> doubleWithLeftChild( AvlNode<E, K> k3 )
         {
             k3.setLeft(rotateWithRightChild( k3.getLeft() ));
             return rotateWithLeftChild( k3 );
@@ -257,14 +258,10 @@
          * @param k1
          * @return
          */
-        private static AvlNode doubleWithRightChild( AvlNode k1 )
+        private AvlNode<E, K> doubleWithRightChild( AvlNode<E, K> k1 )
         {
             k1.setRight(rotateWithLeftChild( k1.getRight() ));
             return rotateWithRightChild( k1 );
         }
 
-
-
-           
-   
 }
