@@ -7,6 +7,7 @@
  *Classe InOutException
  * @author Abdel
  */
+@SuppressWarnings("serial")
 public class InOutException extends Exception {
 
     /**
