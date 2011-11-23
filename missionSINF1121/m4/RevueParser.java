@@ -111,10 +111,12 @@ public class RevueParser {
 		                	 cmd3 = cmd3.toUpperCase();
 		            		 
 		            		 if(cmd3.equals("ALPHA")){
+		            			 System.out.println(dico.getAllAlpha());
 		            			 System.out.println("This feature is not yet available");
 		            		 }
 		            		 
 		            		 if(cmd3.equals("RANK")){
+		            			 System.out.println(dico.getAllNum());
 		            			 System.out.println("This feature is not yet available");
 		            		 }
 	            		 }
@@ -136,6 +138,7 @@ public class RevueParser {
 			            		 String cmd4 = "";
 			            		 cmd4 = clavierIn.nextLine();
 			                	 cmd4 = cmd4.toUpperCase();
+			                	 System.out.println(dico.getFieldAlpha(cmd4));
 			                	 System.out.println("This feature is not yet available");
 		            		 }
 		            		 
@@ -144,6 +147,7 @@ public class RevueParser {
 			            		 String cmd4 = "";
 			            		 cmd4 = clavierIn.nextLine();
 			                	 cmd4 = cmd4.toUpperCase();
+			                	 System.out.println(dico.getFieldNum(cmd4));
 			                	 System.out.println("This feature is not yet available");
 		            		 }
 	            		 }

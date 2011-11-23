@@ -51,21 +51,21 @@ public class BDDRevue {
 		map.put(revueRead.getTitle().toUpperCase(), revueRead);
 		
         //Tri par domaine, ordre alphabétique
-        if(domainTitre.get(revueRead.getFor1())==null){
-        	domainTitre.put(revueRead.getFor1(), new ConcurrentSkipListMap<String,Revue>());
-        	domainTitre.get(revueRead.getFor1()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
+        if(domainTitre.get(revueRead.getFor1().toUpperCase())==null){
+        	domainTitre.put(revueRead.getFor1().toUpperCase(), new ConcurrentSkipListMap<String,Revue>());
+        	domainTitre.get(revueRead.getFor1().toUpperCase()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
         }
         else {
-        	domainTitre.get(revueRead.getFor1()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
+        	domainTitre.get(revueRead.getFor1().toUpperCase()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
         }
         
       //Tri par domaine, ordre numérique
-        if(domainRang.get(revueRead.getFor1())==null){
-        	domainRang.put(revueRead.getFor1(), new ConcurrentSkipListMap<String,Revue>());
-        	domainRang.get(revueRead.getFor1()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
+        if(domainRang.get(revueRead.getFor1().toUpperCase())==null){
+        	domainRang.put(revueRead.getFor1().toUpperCase(), new ConcurrentSkipListMap<String,Revue>());
+        	domainRang.get(revueRead.getFor1().toUpperCase()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
         }
         else {
-        	domainRang.get(revueRead.getFor1()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
+        	domainRang.get(revueRead.getFor1().toUpperCase()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
         }
         
         //Tri de toutes les revues, ordre alphabétique
