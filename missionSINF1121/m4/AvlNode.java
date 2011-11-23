@@ -1,15 +1,23 @@
 
 /**
  * Class AvlNode
+ * @param <K>
  */
-class AvlNode<E> {
+class AvlNode<E, K> implements Comparable<K>{
     // Constructeur
-
-    AvlNode(Comparable key, E obj) {
-        this(key, obj, null, null);
+	 //attributs
+    private K element;      // clé pour tri
+    private AvlNode<E,K> left;         // enfant gauche
+    private AvlNode<E, K> right;        // enfant droit
+    private int height;       // hauteur
+    private E object; // reference vers object
+    
+    AvlNode(K key, E obj) {
+    	this.element = key;
+    	this.object = obj;
     }
 
-    AvlNode(Comparable key, E obj, AvlNode leftN, AvlNode rightN) {
+    AvlNode(K key, E obj, AvlNode<E, K> leftN, AvlNode<E, K> rightN) {
         element = key;
         left = leftN;
         right = rightN;
@@ -17,7 +25,7 @@ class AvlNode<E> {
         object = obj;
     }
 
-    public Comparable getElement() {
+    public K getElement() {
         return element;
     }
 
@@ -25,7 +33,7 @@ class AvlNode<E> {
         return height;
     }
 
-    public AvlNode getLeft() {
+    public AvlNode<E, K> getLeft() {
         return left;
     }
 
@@ -33,11 +41,11 @@ class AvlNode<E> {
         return object;
     }
 
-    public AvlNode getRight() {
+    public AvlNode<E, K> getRight() {
         return right;
     }
 
-    public void setElement(Comparable element) {
+    public void setElement(K element) {
         this.element = element;
     }
 
@@ -45,7 +53,7 @@ class AvlNode<E> {
         this.height = height;
     }
 
-    public void setLeft(AvlNode left) {
+    public void setLeft(AvlNode<E, K> left) {
         this.left = left;
     }
 
@@ -53,13 +61,15 @@ class AvlNode<E> {
         this.object = object;
     }
 
-    public void setRight(AvlNode right) {
+    public void setRight(AvlNode<E, K> right) {
         this.right = right;
     }
-    //attributs
-    private Comparable element;      // clé pour tri
-    private AvlNode left;         // enfant gauche
-    private AvlNode right;        // enfant droit
-    private int height;       // hauteur
-    private E object; // reference vers object
+ 
+	@Override
+	public int compareTo(K o) {
+		// TODO Auto-generated method stub
+		if(o instanceof String)
+			return ((String) o).compareTo((String)this.element);
+		return 0;
+	}
 }
