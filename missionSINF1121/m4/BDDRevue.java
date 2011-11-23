@@ -1,22 +1,21 @@
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentSkipListMap;
 
 //Auteur : Claude
 
 public class BDDRevue {
 
 	private HashMap<String,Revue> map; //Permet de rechercher une revue
-	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainTitre; //Stocke tous les domaines et y associe des SkipList contenant les revues triés par ordre alphabétique
-	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainRang; //Stocke tous les domaines et y associe des SkipList contenant les revues triés par rang
-	private ConcurrentSkipListMap<String,Revue> map2; //Permet de lister toutes les revues triées par ordre alphabétique
-	private ConcurrentSkipListMap<String,Revue> map3; //Permet de lister toutes les revues triées par rang
+	private HashMap<String,AvlTree<Revue,String>> domainTitre; //Stocke tous les domaines et y associe des SkipList contenant les revues triï¿½s par ordre alphabï¿½tique
+	private HashMap<String,AvlTree<Revue,String>> domainRang; //Stocke tous les domaines et y associe des SkipList contenant les revues triï¿½s par rang
+	private AvlTree<Revue,String> map2; //Permet de lister toutes les revues triï¿½es par ordre alphabï¿½tique
+	private AvlTree<Revue,String> map3; //Permet de lister toutes les revues triï¿½es par rang
 	
 	public BDDRevue(){
 		map = new HashMap<String,Revue>();
-		domainTitre = new HashMap<String,ConcurrentSkipListMap<String,Revue>>();
-		domainRang = new HashMap<String,ConcurrentSkipListMap<String,Revue>>();
-		map2 = new ConcurrentSkipListMap<String,Revue>();
-		map3 = new ConcurrentSkipListMap<String,Revue>();
+		domainTitre = new HashMap<String,AvlTree<Revue,String>>();
+		domainRang = new HashMap<String,AvlTree<Revue,String>>();
+		map2 = new AvlTree<Revue,String>();
+		map3 = new AvlTree<Revue,String>();
 	}
 	
 	//Chercher une revue dans la BDD
@@ -24,22 +23,22 @@ public class BDDRevue {
 		return map.get(key);
 	}
 	
-	//Lister toutes les revues par ordre alphabétiques
+	//Lister toutes les revues par ordre alphabï¿½tiques
 	public String getAllAlpha(){
 		return "To do";
 	}
 	
-	//Lister toutes les revues par ordre numérique
+	//Lister toutes les revues par ordre numï¿½rique
 	public String getAllNum(){
 		return "To do";
 	}
 		
-	//Lister les revues d'un domaine par ordre alphabétique
+	//Lister les revues d'un domaine par ordre alphabï¿½tique
 	public String getFieldAlpha(String field){
 		return "To do";	
 	}
 	
-	//Lister les revues d'un domaine par ordre numérique
+	//Lister les revues d'un domaine par ordre numï¿½rique
 	public String getFieldNum(String field){
 		return "To do";	
 	}
@@ -50,29 +49,29 @@ public class BDDRevue {
         
 		map.put(revueRead.getTitle().toUpperCase(), revueRead);
 		
-        //Tri par domaine, ordre alphabétique
+        //Tri par domaine, ordre alphabï¿½tique
         if(domainTitre.get(revueRead.getFor1().toUpperCase())==null){
-        	domainTitre.put(revueRead.getFor1().toUpperCase(), new ConcurrentSkipListMap<String,Revue>());
-        	domainTitre.get(revueRead.getFor1().toUpperCase()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
+        	domainTitre.insert(revueRead.getFor1().toUpperCase(), new ConcurrentSkipListMap<String,Revue>());
+        	domainTitre.get(revueRead.getFor1().toUpperCase()).insert(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
         }
         else {
-        	domainTitre.get(revueRead.getFor1().toUpperCase()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
+        	domainTitre.get(revueRead.getFor1().toUpperCase()).insert(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
         }
         
-      //Tri par domaine, ordre numérique
+      //Tri par domaine, ordre numï¿½rique
         if(domainRang.get(revueRead.getFor1().toUpperCase())==null){
         	domainRang.put(revueRead.getFor1().toUpperCase(), new ConcurrentSkipListMap<String,Revue>());
-        	domainRang.get(revueRead.getFor1().toUpperCase()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
+        	domainRang.get(revueRead.getFor1().toUpperCase()).insert(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
         }
         else {
-        	domainRang.get(revueRead.getFor1().toUpperCase()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
+        	domainRang.get(revueRead.getFor1().toUpperCase()).insert(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
         }
         
-        //Tri de toutes les revues, ordre alphabétique
-        map2.put(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
+        //Tri de toutes les revues, ordre alphabï¿½tique
+        map2.insert(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
         
-      //Tri de toutes les revues, ordre numérique
-        map3.put(revueRead.getRank(), map.get(revueRead.getTitle().toUpperCase()));
+      //Tri de toutes les revues, ordre numï¿½rique
+        map3.insert(revueRead.getRank(), map.get(revueRead.getTitle().toUpperCase()));
 	}
 	
 }
