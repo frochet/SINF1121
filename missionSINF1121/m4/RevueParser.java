@@ -9,11 +9,7 @@ public class RevueParser {
 	//Auteur : Florentin,Abdel,Claude
 	private String filePathIn;
 	private InOut handler;
-	private HashMap<String,Revue> map; //Permet de rechercher une revue
-	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainTitre; //Stocke tous les domaines et y associe des SkipList contenant les revues triés par ordre alphabétique
-	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainRang; //Stocke tous les domaines et y associe des SkipList contenant les revues triés par rang
-	private ConcurrentSkipListMap<String,Revue> map2; //Permet de lister toutes les revues triées par ordre alphabétique
-	private ConcurrentSkipListMap<String,Revue> map3; //Permet de lister toutes les revues triées par rang
+	private BDDRevue dico;
 
 
 	/**
@@ -24,12 +20,7 @@ public class RevueParser {
 	public RevueParser(String filePathIn){
 		this.filePathIn = filePathIn;
 		this.handler = new InOut(filePathIn,"");
-		
-		map = new HashMap<String,Revue>();
-		domainTitre = new HashMap<String,ConcurrentSkipListMap<String,Revue>>();
-		domainRang = new HashMap<String,ConcurrentSkipListMap<String,Revue>>();
-		map2 = new ConcurrentSkipListMap<String,Revue>();
-		map3 = new ConcurrentSkipListMap<String,Revue>();
+		dico=new BDDRevue();
 	}
 	
 	/**
@@ -38,7 +29,6 @@ public class RevueParser {
 	*/
 	public void start(){
 		try {
-            // TODO code application logic here
             handler.initReader();
             String line = handler.readLine();
 
@@ -50,34 +40,7 @@ public class RevueParser {
                 	if(line == null) break;
                 	else{
 	                    Revue revueRead=constructRevue(line);
-	                    map.put(revueRead.getTitle().toUpperCase(), revueRead);
-	                    
-	                    //Tri par domaine, ordre alphabétique
-	                    if(domainTitre.get(revueRead.getFor1())==null){
-	                    	domainTitre.put(revueRead.getFor1(), new ConcurrentSkipListMap<String,Revue>());
-	                    	domainTitre.get(revueRead.getFor1()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
-	                    }
-	                    else {
-	                    	domainTitre.get(revueRead.getFor1()).put(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
-	                    }
-	                    
-	                  //Tri par domaine, ordre numérique
-	                    if(domainRang.get(revueRead.getFor1())==null){
-	                    	domainRang.put(revueRead.getFor1(), new ConcurrentSkipListMap<String,Revue>());
-	                    	domainRang.get(revueRead.getFor1()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
-	                    }
-	                    else {
-	                    	domainRang.get(revueRead.getFor1()).put(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
-	                    }
-	                    
-	                    //Tri de toutes les revues, ordre alphabétique
-	                    map2.put(revueRead.getTitle().toUpperCase(), map.get(revueRead.getTitle().toUpperCase()));
-	                    
-	                  //Tri de toutes les revues, ordre numérique
-	                    map3.put(revueRead.getRank(), map.get(revueRead.getTitle().toUpperCase()));
-
-	                    
-	                    //L'enregistrement de la clÃ© sous forme majuscule prend son sens lors de la recherche.
+	                    dico.put(revueRead);
                 	}
                 }
                 handler.closeReader();
@@ -115,12 +78,7 @@ public class RevueParser {
         		 String cmd2 = "";
         		 cmd2 = clavierIn.nextLine();
             	 cmd2 = cmd2.toUpperCase();
-        		 Revue tmp=map.get(cmd2);
-        	                 
-	             /*
-	             * Le fait de mettre le string entrÃ© en majuscule nous permet de rechercher la revue correspondante
-	             * peu importe la maniÃ¨re dont l'utilisateur la entrÃ©e; qu'il y ait ou non des majuscules, minuscules, etc
-	             */
+        		 Revue tmp=dico.getRevue(cmd2);
         	                 
 	             if(tmp==null){
 	                 System.out.println("la revue "+cmd2+" n'existe pas dans la base de donnÃ©e");
