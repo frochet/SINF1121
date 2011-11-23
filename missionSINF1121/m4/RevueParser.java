@@ -1,6 +1,4 @@
-import java.util.HashMap;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentSkipListMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,7 +17,7 @@ public class RevueParser {
 	*/
 	public RevueParser(String filePathIn){
 		this.filePathIn = filePathIn;
-		this.handler = new InOut(filePathIn,"");
+		this.handler = new InOut(this.filePathIn,"");
 		dico=new BDDRevue();
 	}
 	
