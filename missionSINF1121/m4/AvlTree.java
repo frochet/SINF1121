@@ -128,8 +128,6 @@
                     else
                         t = doubleWithRightChild( t );
             }
-            else
-                ;  // Duplicate; do nothing
             t.setHeight( max( height( t.getLeft() ), height( t.getRight() ) ) + 1);
             return t;
         }
