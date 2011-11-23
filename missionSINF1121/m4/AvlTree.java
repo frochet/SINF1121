@@ -109,20 +109,20 @@
         {
             if( t == null )
                 t = new AvlNode<E,K>( x,obj, null, null );
-            else if( x.compareTo( t.getElement() ) < 0 )
+            else if( t.compareTo(x) < 0 )
             {
                 t.setLeft(insert( x,obj, t.getLeft() ));
                 if( height( t.getLeft() ) - height( t.getRight() ) == 2 )
-                    if( x.compareTo( t.getLeft().getElement() ) < 0 )
+                    if( t.compareTo(x) < 0 )
                         t = rotateWithLeftChild( t );
                     else
                         t = doubleWithLeftChild( t );
             }
-            else if( x.compareTo( t.getElement() ) > 0 )
+            else if( t.compareTo(x) > 0 )
             {
                 t.setRight(insert( x,obj, t.getRight() ));
                 if( height( t.getRight() ) - height( t.getLeft() ) == 2 )
-                    if( x.compareTo( t.getRight().getElement() ) > 0 )
+                    if( t.compareTo(x) > 0 )
                         t = rotateWithRightChild( t );
                     else
                         t = doubleWithRightChild( t );
@@ -172,9 +172,9 @@
         private AvlNode<E, K> find( K x, AvlNode<E, K> t )
         {
             while( t != null )
-                if( x.compareTo( t.getElement() ) < 0 )
+                if( t.compareTo(x) < 0 )
                     t = t.getLeft();
-                else if( x.compareTo( t.getElement() ) > 0 )
+                else if( t.compareTo(x) > 0 )
                     t = t.getRight();
                 else
                     return t;    // Match
