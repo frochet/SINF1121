@@ -115,6 +115,27 @@ public class Revue {
     public void setFor3Name(String for3Name) {
         this.for3Name = for3Name;
     }
+
+    public String getFor1Name() {
+        return for1Name;
+    }
+
+    public String getFor2() {
+        return for2;
+    }
+
+    public String getFor2Name() {
+        return for2Name;
+    }
+
+    public String getFor3() {
+        return for3;
+    }
+
+    public String getFor3Name() {
+        return for3Name;
+    }
+
     
 	/**
 	*Set a revue's field value 
