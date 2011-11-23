@@ -24,6 +24,26 @@ public class BDDRevue {
 		return map.get(key);
 	}
 	
+	//Lister toutes les revues par ordre alphabétiques
+	public String getAllAlpha(){
+		return "To do";
+	}
+	
+	//Lister toutes les revues par ordre numérique
+	public String getAllNum(){
+		return "To do";
+	}
+		
+	//Lister les revues d'un domaine par ordre alphabétique
+	public String getFieldAlpha(String field){
+		return "To do";	
+	}
+	
+	//Lister les revues d'un domaine par ordre numérique
+	public String getFieldNum(String field){
+		return "To do";	
+	}
+	
 	
 	
 	public void put(Revue revueRead){
