@@ -9,12 +9,16 @@ public class RevueParser {
 	//Auteur : Florentin,Abdel,Claude
 	private String filePathIn;
 	private InOut handler;
+<<<<<<< HEAD
 	private HashMap<String,Revue> map; //Permet de rechercher une revue
 	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainTitre; //Stocke tous les domaines et y associe des SkipList contenant les revues tri�s par ordre alphab�tique
 	private HashMap<String,ConcurrentSkipListMap<String,Revue>> domainRang; //Stocke tous les domaines et y associe des SkipList contenant les revues tri�s par rang
 	private ConcurrentSkipListMap<String,Revue> map2; //Permet de lister toutes les revues tri�es par ordre alphab�tique
 	private ConcurrentSkipListMap<String,Revue> map3; //Permet de lister toutes les revues tri�es par rang
         private AvlTree<Revue> dico;
+=======
+	private BDDRevue dico;
+>>>>>>> 237ff61597bb6f859cd94ce5ef6054a8934cb41d
 
 
 	/**
@@ -25,6 +29,7 @@ public class RevueParser {
 	public RevueParser(String filePathIn){
 		this.filePathIn = filePathIn;
 		this.handler = new InOut(filePathIn,"");
+<<<<<<< HEAD
 		
 		map = new HashMap<String,Revue>();
 		domainTitre = new HashMap<String,ConcurrentSkipListMap<String,Revue>>();
@@ -32,6 +37,9 @@ public class RevueParser {
 		map2 = new ConcurrentSkipListMap<String,Revue>();
 		map3 = new ConcurrentSkipListMap<String,Revue>();
                 dico=new AvlTree<Revue>();
+=======
+		dico=new BDDRevue();
+>>>>>>> 237ff61597bb6f859cd94ce5ef6054a8934cb41d
 	}
 	
 	/**
@@ -40,7 +48,6 @@ public class RevueParser {
 	*/
 	public void start(){
 		try {
-            // TODO code application logic here
             handler.initReader();
             String line = handler.readLine();
 
@@ -52,6 +59,7 @@ public class RevueParser {
                 	if(line == null) break;
                 	else{
 	                    Revue revueRead=constructRevue(line);
+<<<<<<< HEAD
 	                    map.put(revueRead.getTitle().toUpperCase(), revueRead);
                             dico.insert(revueRead.getTitle(), revueRead);
 
@@ -82,6 +90,9 @@ public class RevueParser {
 
 	                    
 	                    //L'enregistrement de la clé sous forme majuscule prend son sens lors de la recherche.
+=======
+	                    dico.put(revueRead);
+>>>>>>> 237ff61597bb6f859cd94ce5ef6054a8934cb41d
                 	}
                 }
                 handler.closeReader();
@@ -120,12 +131,7 @@ public class RevueParser {
         		 String cmd2 = "";
         		 cmd2 = clavierIn.nextLine();
             	 cmd2 = cmd2.toUpperCase();
-        		 Revue tmp=map.get(cmd2);
-        	                 
-	             /*
-	             * Le fait de mettre le string entré en majuscule nous permet de rechercher la revue correspondante
-	             * peu importe la manière dont l'utilisateur la entrée; qu'il y ait ou non des majuscules, minuscules, etc
-	             */
+        		 Revue tmp=dico.getRevue(cmd2);
         	                 
 	             if(tmp==null){
 	                 System.out.println("la revue "+cmd2+" n'existe pas dans la base de donnée");
@@ -158,10 +164,12 @@ public class RevueParser {
 		                	 cmd3 = cmd3.toUpperCase();
 		            		 
 		            		 if(cmd3.equals("ALPHA")){
+		            			 System.out.println(dico.getAllAlpha());
 		            			 System.out.println("This feature is not yet available");
 		            		 }
 		            		 
 		            		 if(cmd3.equals("RANK")){
+		            			 System.out.println(dico.getAllNum());
 		            			 System.out.println("This feature is not yet available");
 		            		 }
 	            		 }
@@ -183,6 +191,7 @@ public class RevueParser {
 			            		 String cmd4 = "";
 			            		 cmd4 = clavierIn.nextLine();
 			                	 cmd4 = cmd4.toUpperCase();
+			                	 System.out.println(dico.getFieldAlpha(cmd4));
 			                	 System.out.println("This feature is not yet available");
 		            		 }
 		            		 
@@ -191,6 +200,7 @@ public class RevueParser {
 			            		 String cmd4 = "";
 			            		 cmd4 = clavierIn.nextLine();
 			                	 cmd4 = cmd4.toUpperCase();
+			                	 System.out.println(dico.getFieldNum(cmd4));
 			                	 System.out.println("This feature is not yet available");
 		            		 }
 	            		 }
