@@ -1,8 +1,6 @@
 
 /**
- *
  * Class AvlNode
- * 
  */
 class AvlNode<E> {
     // Constructeur

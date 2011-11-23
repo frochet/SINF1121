@@ -3,8 +3,6 @@
    
     /**
      * Class AVLtree
-     *
-     * 
      */
     public class AvlTree<E>
     {
