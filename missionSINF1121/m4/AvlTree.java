@@ -3,6 +3,7 @@
    
     /**
      * Class AVLtree
+     * Auteur Florentin, Abdel
      * @param <K>
      */
     public class AvlTree<E, K>

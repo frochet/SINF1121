@@ -1,6 +1,7 @@
 
 /**
  * Class AvlNode
+ * Auteur : Florentin, Abdel
  * @param <K>
  */
 class AvlNode<E, K> implements Comparable<K>{
