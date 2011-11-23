@@ -51,7 +51,7 @@ public class BDDRevue {
 		
         //Tri par domaine, ordre alphab�tique
         if(domainTitre.get(revueRead.getFor1().toUpperCase())==null){
-        	domainTitre.insert(revueRead.getFor1().toUpperCase(), new ConcurrentSkipListMap<String,Revue>());
+        	domainTitre.put(revueRead.getFor1().toUpperCase(), new AvlTree<Revue,String>());
         	domainTitre.get(revueRead.getFor1().toUpperCase()).insert(revueRead.getTitle().toUpperCase(),map.get(revueRead.getTitle().toUpperCase()));
         }
         else {
@@ -60,7 +60,7 @@ public class BDDRevue {
         
       //Tri par domaine, ordre num�rique
         if(domainRang.get(revueRead.getFor1().toUpperCase())==null){
-        	domainRang.put(revueRead.getFor1().toUpperCase(), new ConcurrentSkipListMap<String,Revue>());
+        	domainRang.put(revueRead.getFor1().toUpperCase(), new AvlTree<Revue,String>());
         	domainRang.get(revueRead.getFor1().toUpperCase()).insert(revueRead.getRank(),map.get(revueRead.getTitle().toUpperCase()));
         }
         else {
