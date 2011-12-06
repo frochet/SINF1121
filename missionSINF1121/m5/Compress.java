@@ -1,4 +1,6 @@
-
+/*
+ * Auteur : Florentin
+ */
 public class Compress {
 	private String filein,fileout;
 	

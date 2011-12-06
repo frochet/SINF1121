@@ -1,4 +1,6 @@
-
+/*
+ * Auteur : Florentin
+ */
 public class BinaryNode<K> {
 	private K elem;
 	private BinaryNode<K> parent, rigth,left;

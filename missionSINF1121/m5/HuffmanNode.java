@@ -1,3 +1,6 @@
+/*
+ * Auteur : Florentin
+ */
 /*Chaque noeud de l'arbre contiendra soit :
 	 * - Seulement un poid
 	 * - Seulement fréquence et lettre correspondante.*/

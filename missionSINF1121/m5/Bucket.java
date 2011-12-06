@@ -1,4 +1,6 @@
-
+/*
+ * Auteur : Florentin
+ */
 public class Bucket<E> {
 	
 	private E element;

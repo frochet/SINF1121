@@ -1,4 +1,6 @@
-
+/*
+ * Auteur : Florentin
+ */
 public class PriorityQueueHeap {
 	
 	private Bucket<HuffmanNode>[] heap;

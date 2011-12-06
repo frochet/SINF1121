@@ -1,4 +1,6 @@
-
+/*
+ * Auteur : Florentin
+ */
 public class Huffman {
 	private BinaryTree<HuffmanNode> huffTree;
 	private String str; // Le String associé à l'arbre

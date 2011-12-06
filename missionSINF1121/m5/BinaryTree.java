@@ -1,4 +1,6 @@
-
+/*
+ * Auteur : Florentin
+ */
 public class BinaryTree<K> {
 	
 	private BinaryNode<K> root;
