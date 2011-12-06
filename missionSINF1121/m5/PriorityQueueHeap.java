@@ -18,7 +18,7 @@ public class PriorityQueueHeap {
 		this.heap[index] = new Bucket<HuffmanNode>(element);
 		int parent = getParent(index);
 		
-		while (	parent >= 0 && heap[parent].getElement().compareTo(element) > 0)
+		while (	parent >= 0 && element.compareTo(heap[parent].getElement()) > 0)
 		{
 			// Echange des deux éléments.
 			swap(parent, index);
