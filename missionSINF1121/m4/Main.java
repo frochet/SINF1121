@@ -14,7 +14,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    	RevueParser parser = new RevueParser("journals.csv"); // En chemin relatif les gars :-)
+    	RevueParser parser = new RevueParser("journals.csv"); 
     	parser.start();
     	parser.commandLine();
     }
