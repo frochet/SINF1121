@@ -1,12 +1,15 @@
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /*
  * Auteur : Florentin,Abdel
  */
-public class Compress {
+public class Compress implements Serializable {
 
     private String filein, fileout;
     private InOut writerReader;
@@ -42,7 +45,7 @@ public class Compress {
             System.out.println("texte encodé = " + huffman.getTexteEncodé());
 
             StringBuffer tmpReader2 = new StringBuffer();
-            for (int i = 0; i < huffman.getTexteEncodé().length(); i ++) {
+            for (int i = 0; i < huffman.getTexteEncodé().length(); i++) {
                 StringBuffer tmpReader = new StringBuffer();
                 tmpReader.append(huffman.getTexteEncodé().charAt(i));
                 tmpReader2.append(huffman.getTexteEncodé().charAt(i));
@@ -56,6 +59,10 @@ public class Compress {
 
 
             }
+            FileOutputStream fos = new FileOutputStream(fileout+".arbre");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(huffman);
+            oos.close();
             System.out.println("Fin = " + tmpReader2.toString());
 
             out.close();

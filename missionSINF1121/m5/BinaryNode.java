@@ -1,7 +1,10 @@
+
+import java.io.Serializable;
+
 /*
  * Auteur : Florentin
  */
-public class BinaryNode<K>{
+public class BinaryNode<K> implements Serializable{
 	private K elem;
 	private BinaryNode<K> parent, rigth,left;
 

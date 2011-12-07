@@ -1,7 +1,10 @@
+
+import java.io.Serializable;
+
 /*
  * Auteur : Florentin
  */
-public class Bucket<E> {
+public class Bucket<E> implements Serializable{
 	
 	private E element;
 

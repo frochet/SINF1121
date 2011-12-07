@@ -1,3 +1,6 @@
+
+import java.io.Serializable;
+
 /*
  * Auteur : Florentin, Claude
  */
@@ -5,7 +8,7 @@
  * - Seulement un poid
  * - Seulement fr�quence et lettre correspondante.*/
 
-public class HuffmanNode implements Comparable {
+public class HuffmanNode implements Comparable,Serializable {
 
     private int poids;
     private int frequence;

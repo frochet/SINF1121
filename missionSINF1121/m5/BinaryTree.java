@@ -1,7 +1,10 @@
+
+import java.io.Serializable;
+
 /*
  * Auteur : Florentin, Claude
  */
-public class BinaryTree<K> {
+public class BinaryTree<K> implements Serializable {
 	
 	private BinaryNode<K> root;
 	

@@ -1,10 +1,11 @@
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /*
  * Auteur : Florentin, Claude,Abdel
  */
-public class Huffman {
+public class Huffman implements Serializable {
 
     private BinaryTree<HuffmanNode> huffTree;
     private String[] huffCode;
