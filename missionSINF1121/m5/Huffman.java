@@ -11,11 +11,10 @@ public class Huffman {
 	//Constructeur
 	public Huffman(String str) throws PriorityQueueException{
 		this.str = str;
-		huffTree = new BinaryTree<HuffmanNode>();
-		huffCode = new String[NCHAR];
 		this.freq = freqCount(this.str);
-		this.makeHuffTree();
-		
+		huffTree = this.makeHuffTree();
+		huffCode = new String[NCHAR];
+		this.makeHuffCode();
 	}
 	
 	/*Retourne un tableau de frŽquence dont la position de la frŽquence i correspond au caract�re i dans la table ASCII*/
