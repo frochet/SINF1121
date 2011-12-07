@@ -34,7 +34,7 @@ public class Huffman {
         }
 
         this.str = str;
-        this.freq = freqCount(this.str);
+     
         huffCode = new String[NCHAR];
         huffTree = this.makeHuffTree();
         // Utils.display(huffTree.getRoot());
@@ -115,15 +115,7 @@ public class Huffman {
 
 
     /*Retourne un tableau de frŽquence dont la position de la frŽquence i correspond au caract�re i dans la table ASCII*/
-    public int[] freqCount(String text) {
-        int freq[] = new int[NCHAR];
-
-        for (int i = 0; i < text.length(); i++) {
-            freq[text.charAt(i)]++;
-        }
-
-        return freq;
-    }
+  
 
     public BinaryTree<HuffmanNode> makeHuffTree() throws PriorityQueueException {
         //Initialisation de la PriorityQueue

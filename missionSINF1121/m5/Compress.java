@@ -31,18 +31,34 @@ public class Compress {
             while (!writerReader.isEndOfFile()) {
 
                 buffer.append(writerReader.readLine());
+                buffer.append("\n");
 
             }
             writerReader.closeReader();
             huffman = new Huffman(buffer.toString());
             OutputBitStream out = new OutputBitStream(fileout);
-            for (int i = 0; i < huffman.getTexteEncodé().length(); i = i + 8) {
-                if (i + 8 < this.huffman.getTexteEncodé().length()) {
-                    out.write((Integer.parseInt(huffman.getTexteEncodé().substring(i, i + 8))));
-                }else{
-                     out.write((Integer.parseInt(huffman.getTexteEncodé().substring(i, i + (huffman.getTexteEncodé().length()-i-1)))));
+            int oct = 0;
+            boolean temp;
+            System.out.println("texte encodé = " + huffman.getTexteEncodé());
+
+            StringBuffer tmpReader2 = new StringBuffer();
+            for (int i = 0; i < huffman.getTexteEncodé().length(); i ++) {
+                StringBuffer tmpReader = new StringBuffer();
+                tmpReader.append(huffman.getTexteEncodé().charAt(i));
+                tmpReader2.append(huffman.getTexteEncodé().charAt(i));
+                boolean val;
+                if (tmpReader.toString().equals("0")) {
+                    val = false;
+                } else {
+                    val = true;
                 }
+                out.write(val);
+
+
             }
+            System.out.println("Fin = " + tmpReader2.toString());
+
+            out.close();
 
 
         } catch (IOException ex) {

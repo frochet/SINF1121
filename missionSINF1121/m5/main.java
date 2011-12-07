@@ -2,24 +2,17 @@
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-
-
 public class main {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-        try {
-            Huffman texteaEncodé = new Huffman("Saluuuutttt monsieur beauuuu");
-            System.out.println("texte encodé est "+texteaEncodé.getTexteEncodé());
-            Huffman texteDecodé=new Huffman(texteaEncodé.getHuffTree(), texteaEncodé.getTexteEncodé());
-            System.out.println("Texte decodé = "+texteDecodé.Decodebit(texteaEncodé.getTexteEncodé()));
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        Compress compres = new Compress("C:\\Users\\Abdel\\Desktop\\test", "C:\\Users\\Abdel\\Desktop\\output");
+        compres.compressFile();
+        Decompress decompress=new Decompress("C:\\Users\\Abdel\\Desktop\\output","C:\\Users\\Abdel\\Desktop\\decompression", compres.getHuffmanInformation());
 
-        } catch (PriorityQueueException ex) {
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-	}
-
+        decompress.decompress();
+        System.out.println("Fini");
+    }
 }
