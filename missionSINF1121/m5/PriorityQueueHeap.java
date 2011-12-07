@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 /*
  * Auteur : Florentin, Claude
  */
@@ -5,9 +7,10 @@ public class PriorityQueueHeap<E>{
 	
 	private Bucket<E>[] heap;
 	private int nbrObject = 0;
-	
+	private Comparator<E> comparator;
 	public PriorityQueueHeap(int defaultsize, Comparator<E> comparator){
 		this.heap = new Bucket[defaultsize];
+		this.comparator = comparator;
 	}
 	
 	public int size()	{
@@ -20,7 +23,7 @@ public class PriorityQueueHeap<E>{
 		this.heap[index] = new Bucket<E>(element);
 		int parent = getParent(index);
 		
-		while (	parent >= 0 && element.compareTo(heap[parent].getElement()) > 0)
+		while (	parent >= 0 && comparator.compare(element, heap[parent].getElement()) > 0)
 		{
 			// Echange des deux éléments.
 			swap(parent, index);
