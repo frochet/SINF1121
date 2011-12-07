@@ -4,7 +4,7 @@
 /*Chaque noeud de l'arbre contiendra soit :
 	 * - Seulement un poid
 	 * - Seulement frŽquence et lettre correspondante.*/
-	public class HuffmanNode{
+	public class HuffmanNode implements Comparable{
 		private int poids;
 		private int frequence;
 		private char letter;
@@ -26,5 +26,20 @@
 		public int getLetter(){
 			return this.letter;
 		}
+		
+		 public int compareTo(Object o) {
+
+		        if (o instanceof HuffmanNode) {
+		            if (((HuffmanNode)o).getFrequence() > (this.getFrequence())) {
+		                return 1;
+		            } else if (((HuffmanNode)o).getFrequence() < this.getFrequence()) {
+		                return -1;
+		            } else {
+		                return 0;
+		            }
+		        }else{
+		            return 0;
+		        }
+		    }
 	}
 	

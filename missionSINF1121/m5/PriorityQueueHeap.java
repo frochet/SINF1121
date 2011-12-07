@@ -2,27 +2,26 @@
 /*
  * Auteur : Florentin, Claude
  */
-public class PriorityQueueHeap<E>{
+public class PriorityQueueHeap{
 	
-	private Bucket<E>[] heap;
+	private Bucket<BinaryNode<HuffmanNode>>[] heap;
 	private int nbrObject = 0;
-	private Comparator<E> comparator;
-	public PriorityQueueHeap(int defaultsize, Comparator<E> comparator){
+	
+	public PriorityQueueHeap(int defaultsize){
 		this.heap = new Bucket[defaultsize];
-		this.comparator = comparator;
 	}
 	
 	public int size()	{
 		return nbrObject;
 	}
 	
-	public void add(E element){
+	public void add(BinaryNode<HuffmanNode> element){
 		
 		int index = nbrObject;
-		this.heap[index] = new Bucket<E>(element);
+		this.heap[index] = new Bucket<BinaryNode<HuffmanNode>>(element);
 		int parent = getParent(index);
 		
-		while (	parent >= 0 && comparator.compare(element, heap[parent].getElement()) > 0){
+		while (	(parent >= 0) && (element.element().compareTo(heap[parent].getElement().element()) > 0)){
 			// Echange des deux éléments.
 			swap(parent, index);
 			
@@ -49,12 +48,12 @@ public class PriorityQueueHeap<E>{
 		return getLeft(index) + 1;
 	}
 	private void swap(int a, int b){
-		E tmp = heap[a].getElement();
+		BinaryNode<HuffmanNode> tmp = heap[a].getElement();
 		heap[a].setElement(heap[b].getElement());
 		heap[b].setElement(tmp);
 	}
 	
-	public E peek() throws PriorityQueueException{
+	public BinaryNode<HuffmanNode> peek() throws PriorityQueueException{
 		if (nbrObject > 0){
 			nbrObject--;
 			return heap[0].getElement();

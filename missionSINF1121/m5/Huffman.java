@@ -17,6 +17,14 @@ public class Huffman {
 		this.makeHuffCode();
 	}
 	
+	public String[] getHuffCode(){
+		return huffCode;
+	}
+	
+	public String[] getHuffTree(){
+		return huffTree;
+	}
+	
 	/*Retourne un tableau de frŽquence dont la position de la frŽquence i correspond au caract�re i dans la table ASCII*/
 	public int[] freqCount(String text) {
         int freq[] = new int[NCHAR];
