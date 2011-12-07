@@ -8,10 +8,10 @@
 		private int poids;
 		private int frequence;
 		private char letter;
-		private HuffmanNode(int poids){ /* Correspond ˆ un noeud de l'arbre */
+		HuffmanNode(int poids){ /* Correspond ˆ un noeud de l'arbre */
 			this.poids = poids;
 		}
-		private HuffmanNode(int frequence, char letter){ /* Correspond ˆ une feuille de l'arbre */
+		HuffmanNode(int frequence, char letter){ /* Correspond ˆ une feuille de l'arbre */
 			this.frequence = frequence;
 			this.letter = letter;
 		}

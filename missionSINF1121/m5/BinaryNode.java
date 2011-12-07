@@ -10,4 +10,18 @@ public class BinaryNode<K> {
 		this.left = left;
 		this.rigth = right;
 	}
+	public void setRight(BinaryNode<K> right)
+	{
+		this.rigth = right;
+	}
+	
+	public void setLeft(BinaryNode<K> left)
+	{
+		this.left = left;
+	}
+	public K element()
+	{
+		return elem;
+	}
+	
 }

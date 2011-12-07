@@ -1,5 +1,5 @@
 /*
- * Auteur : Florentin
+ * Auteur : Florentin, Claude
  */
 public class BinaryTree<K> {
 	
@@ -11,5 +11,7 @@ public class BinaryTree<K> {
 	public void setRoot(BinaryNode<K> root){
 		this.root = root;
 	}
-	
+	public BinaryNode<K> getRoot(){
+		return root;
+	}
 }

@@ -1,21 +1,24 @@
 /*
- * Auteur : Florentin
+ * Auteur : Florentin, Claude
  */
-public class PriorityQueueHeap {
+public class PriorityQueueHeap<E>{
 	
-	private Bucket<HuffmanNode>[] heap;
-	private int defaultsize;
+	private Bucket<E>[] heap;
 	private int nbrObject = 0;
 	
 	public PriorityQueueHeap(int defaultsize){
-		this.defaultsize = defaultsize;
 		this.heap = new Bucket[defaultsize];
 	}
 	
-	public void add(HuffmanNode element){
+	public int size()
+	{
+		return nbrObject;
+	}
+	
+	public void add(E element){
 		
 		int index = nbrObject;
-		this.heap[index] = new Bucket<HuffmanNode>(element);
+		this.heap[index] = new Bucket<E>(element);
 		int parent = getParent(index);
 		
 		while (	parent >= 0 && element.compareTo(heap[parent].getElement()) > 0)
@@ -50,15 +53,18 @@ public class PriorityQueueHeap {
 	}
 	private void swap(int a, int b)
 	{
-		HuffmanNode tmp = heap[a].getElement();
+		E tmp = heap[a].getElement();
 		heap[a].setElement(heap[b].getElement());
 		heap[b].setElement(tmp);
 	}
 	
-	public HuffmanNode peek() throws PriorityQueueException
+	public E peek() throws PriorityQueueException
 	{
 		if (nbrObject > 0)
+		{
+			nbrObject--;
 			return heap[0].getElement();
+		}
 		else
 			throw new PriorityQueueException("File vide.");
 	}
