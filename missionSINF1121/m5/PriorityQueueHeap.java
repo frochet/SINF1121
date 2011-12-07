@@ -6,7 +6,7 @@ public class PriorityQueueHeap<E>{
 	private Bucket<E>[] heap;
 	private int nbrObject = 0;
 	
-	public PriorityQueueHeap(int defaultsize){
+	public PriorityQueueHeap(int defaultsize, Comparator<E> comparator){
 		this.heap = new Bucket[defaultsize];
 	}
 	
