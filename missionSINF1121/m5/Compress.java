@@ -31,10 +31,12 @@ public class Compress implements Serializable {
         StringBuffer buffer = new StringBuffer();
         writerReader.initReader();
         try {
+            buffer.append(writerReader.readLine());
             while (!writerReader.isEndOfFile()) {
 
-                buffer.append(writerReader.readLine());
+                
                 buffer.append("\n");
+                buffer.append(writerReader.readLine());
 
             }
             writerReader.closeReader();
@@ -42,7 +44,7 @@ public class Compress implements Serializable {
             OutputBitStream out = new OutputBitStream(fileout);
             int oct = 0;
             boolean temp;
-            System.out.println("texte encodé = " + huffman.getTexteEncodé());
+
 
             StringBuffer tmpReader2 = new StringBuffer();
             for (int i = 0; i < huffman.getTexteEncodé().length(); i++) {
@@ -59,13 +61,14 @@ public class Compress implements Serializable {
 
 
             }
-            FileOutputStream fos = new FileOutputStream(fileout+".arbre");
+            FileOutputStream fos = new FileOutputStream(fileout + ".arbre");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(huffman);
             oos.close();
-            System.out.println("Fin = " + tmpReader2.toString());
+
 
             out.close();
+            System.out.println("Compression terminée.");
 
 
         } catch (IOException ex) {
@@ -76,6 +79,20 @@ public class Compress implements Serializable {
             System.out.println("erreur de lecture du fichier d'entré");
         }
 
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println(args[0]);
+        System.out.println(args[1]);
+        if (args == null || args.length != 2) {
+            System.out.println("Usage :");
+            System.out.println("Compress [file1] [file2]");
+            System.exit(0);
+        }
+        Compress compression = new Compress(args[0], args[1]);
+        compression.compressFile();
+        System.exit(0);
 
     }
 }

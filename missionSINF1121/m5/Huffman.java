@@ -77,7 +77,7 @@ public class Huffman implements Serializable {
     }
 
     public String Decodebit(String txtToDecode) {
-        System.out.println(this.codeCharacter);
+       
         String tmp = "";
         int begin, end;
         begin = 0;
@@ -97,7 +97,7 @@ public class Huffman implements Serializable {
             }
 
         }
-        System.out.println("decodage = "+tmp);
+     
         return tmp;
 
     }

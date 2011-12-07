@@ -1,7 +1,5 @@
 
-import com.sun.corba.se.impl.io.IIOPInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -70,13 +68,27 @@ public class Decompress implements Serializable {
 
             huffman.Decodebit(codeLu.toString());
             rederWriter.initWriter();
-            rederWriter.write(huffman.Decodebit(codeLu.toString()));
-            System.out.println("Code lu est = " + codeLu.toString());
+            
+
+            rederWriter.write(huffman.Decodebit(codeLu.toString()).substring(0,huffman.Decodebit(codeLu.toString()).indexOf("null")));
+
             rederWriter.closeWriter();
+            System.out.println("Decompression terminée");
 
         } catch (InOutException ex) {
             Logger.getLogger(Decompress.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public static void main(String[] args) {
+        if (args == null || args.length != 2) {
+            System.out.println("Usage :");
+            System.out.println("Decompress [file1] [file2]");
+            System.exit(0);
+        }
+
+        Decompress decompression=new Decompress(args[0], args[1]);
+        decompression.decompress();
     }
 }
