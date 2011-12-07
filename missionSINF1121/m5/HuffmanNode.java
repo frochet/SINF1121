@@ -4,7 +4,7 @@
 /*Chaque noeud de l'arbre contiendra soit :
 	 * - Seulement un poid
 	 * - Seulement fréquence et lettre correspondante.*/
-	public class HuffmanNode implements Comparable<HuffmanNode>{
+	public class HuffmanNode{
 		private int poids;
 		private int frequence;
 		private char letter;

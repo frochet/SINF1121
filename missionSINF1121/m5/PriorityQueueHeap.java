@@ -23,8 +23,7 @@ public class PriorityQueueHeap<E>{
 		this.heap[index] = new Bucket<E>(element);
 		int parent = getParent(index);
 		
-		while (	parent >= 0 && comparator.compare(element, heap[parent].getElement()) > 0)
-		{
+		while (	parent >= 0 && comparator.compare(element, heap[parent].getElement()) > 0){
 			// Echange des deux éléments.
 			swap(parent, index);
 			
@@ -37,39 +36,31 @@ public class PriorityQueueHeap<E>{
 	}
 	
 	// Pour un index, calcule son parent dans le tas.
-	private int getParent(int index)
-	{
+	private int getParent(int index){
 		return (int) Math.floor((index - 1) / 2);
 	}
 
 	// Pour un index, calcule son fils à gauche dans le tas.
-	private int getLeft(int index)
-	{
+	private int getLeft(int index){
 		return index * 2 + 1;
 	}
 
 	// Pour un index, calcule son fils à droite dans le tas.
-	private int getRight(int index)
-	{
+	private int getRight(int index){
 		return getLeft(index) + 1;
 	}
-	private void swap(int a, int b)
-	{
+	private void swap(int a, int b){
 		E tmp = heap[a].getElement();
 		heap[a].setElement(heap[b].getElement());
 		heap[b].setElement(tmp);
 	}
 	
-	public E peek() throws PriorityQueueException
-	{
-		if (nbrObject > 0)
-		{
+	public E peek() throws PriorityQueueException{
+		if (nbrObject > 0){
 			nbrObject--;
 			return heap[0].getElement();
 		}
 		else
 			throw new PriorityQueueException("File vide.");
 	}
-
-
 }
