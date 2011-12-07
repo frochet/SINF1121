@@ -3,6 +3,7 @@
  */
 public class Huffman {
 	private BinaryTree<HuffmanNode> huffTree;
+	private String[] huffCode;
 	private String str; // Le String associŽ ˆ l'arbre
 	private int[] freq;
 	final static int NCHAR = 128; 
@@ -10,6 +11,14 @@ public class Huffman {
 		this.str = str;
 		huffTree = new BinaryTree<HuffmanNode>();
 		this.freq = freqCount(this.str);
+	}
+	
+	public void constructCode(){
+		String huffCode[] = new String[NCHAR];
+		for (int i=0;i<freq.length;i++)
+		{
+			
+		}
 	}
 	
 	public void construcTree() throws PriorityQueueException{
@@ -21,7 +30,7 @@ public class Huffman {
 			BinaryTree<HuffmanNode> currentTree = new BinaryTree<HuffmanNode>();
 			HuffmanNode currentNode= new HuffmanNode(freq[i], (char)i);
 			currentTree.setRoot(new BinaryNode<HuffmanNode>(currentNode,null,null,null));
-			heap.add(currentTree);
+			heap.add(currentTree); // ATTENTION, méthode incorrecte, on devrait avoir plutot heap.insert((char)i,freq(i))
 		}
 		//Fusions d'arbres
 		while(heap.size()>1)
@@ -38,13 +47,31 @@ public class Huffman {
 					T1.getRoot().element().getFrequence() +
 					T2.getRoot().element().getFrequence());
 			T3.setRoot(new BinaryNode<HuffmanNode>(T3Node,null,T1.getRoot(),T2.getRoot()));
-			heap.add(T3);
+			if (T1.getRoot().isExternal()==true) {
+				huffCode[(char)T1.getRoot().element().getLetter()]=huffCode[(char)T1.getRoot().element().getLetter()]+"0";
+				huffCode[(char)T2.getRoot().element().getLetter()]=huffCode[(char)T2.getRoot().element().getLetter()]+"1";
+			}
+			else {
+				
+			}
+			
+			heap.add(T3); // ATTENTION, méthode incorrecte, on devrait avoir plutot heap.insert(i,freq(i))
 		}
 		//Le dernier arbre restant est l'arbre de Huffman
 		huffTree=heap.peek();	
 	}	
 		
 
+	public void makeHuffCode(BinaryTree<BinaryNode<HuffmanNode>> tree, String upCode){
+		if (tree.getRoot().isExternal()==false) {
+			//TO-DO
+		}
+		else {
+			//TO-DO
+		} 
+	}
+	
+	
 	/*Retourne un tableau de frŽquence dont la position de la frŽquence i correspond au caract�re i dans la table ASCII*/
 	public int[] freqCount(String text) {
         int freq[] = new int[NCHAR];

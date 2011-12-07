@@ -31,5 +31,9 @@
 		public int getFrequence(){
 			return this.frequence;
 		}
+		
+		public int getLetter(){
+			return this.letter;
+		}
 	}
 	

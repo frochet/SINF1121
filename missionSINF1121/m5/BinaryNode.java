@@ -19,6 +19,32 @@ public class BinaryNode<K> {
 	{
 		this.left = left;
 	}
+	
+	public BinaryNode<K> getRight()
+	{
+		return rigth;
+	}
+	
+	public BinaryNode<K> getLeft()
+	{
+		return left;
+	}
+	
+	public boolean isExternal(){
+		if (rigth==null|left==null)
+		{
+			return false;
+		}
+		else 
+		{
+			return true;
+		}
+	}	
+	
+	
+			
+			
+	
 	public K element()
 	{
 		return elem;
