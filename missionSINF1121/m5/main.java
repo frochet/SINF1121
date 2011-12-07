@@ -1,4 +1,8 @@
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 
 
 public class main {
@@ -8,10 +12,13 @@ public class main {
 	 */
 	public static void main(String[] args) {
         try {
-            Huffman tmp = new Huffman("sssssssssssssssssssssssssalut toi mon petit enfant");
-            System.out.println(tmp.getCodeCharacter());
+            Huffman texteaEncodé = new Huffman("Saluuuutttt monsieur beauuuu");
+            System.out.println("texte encodé est "+texteaEncodé.getTexteEncodé());
+            Huffman texteDecodé=new Huffman(texteaEncodé.getHuffTree(), texteaEncodé.getTexteEncodé());
+            System.out.println("Texte decodé = "+texteDecodé.Decodebit(texteaEncodé.getTexteEncodé()));
+
         } catch (PriorityQueueException ex) {
-            System.out.println(ex);;
+            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
 	}
 

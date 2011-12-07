@@ -12,13 +12,16 @@ public class Huffman {
     private int[] freq;
     final static int NCHAR = 128;
     private HashMap<Character, Integer> frequenceLettre;
-    private  HashMap<Character,String> codeCharacter;
+    private HashMap<Character, String> codeCharacter;
+    private HashMap<String, Character> codeLettre;
     private String texteEncodé;
+
     //Constructeur
 
     public Huffman(String str) throws PriorityQueueException {
         frequenceLettre = new HashMap<Character, Integer>();
-        codeCharacter=new HashMap<Character, String>();
+        codeCharacter = new HashMap<Character, String>();
+        codeLettre = new HashMap<String, Character>();
 
         for (char e : str.toCharArray()) {
             if (frequenceLettre.containsKey(e)) {
@@ -34,18 +37,67 @@ public class Huffman {
         this.freq = freqCount(this.str);
         huffCode = new String[NCHAR];
         huffTree = this.makeHuffTree();
-       // Utils.display(huffTree.getRoot());
+        // Utils.display(huffTree.getRoot());
 
         this.makeHuffCode();
         this.EncodeTexte(str);
+
+        for (Character f : codeCharacter.keySet()) {
+            this.codeLettre.put(codeCharacter.get(f), f);
+        }
+
     }
 
-    private void EncodeTexte(String txtDepart){
-        this.texteEncodé="";
-        for(char e:txtDepart.toCharArray()){
-            texteEncodé+=codeCharacter.get(e);
+    public Huffman(BinaryTree<HuffmanNode> arbre, String codeBinaire) {
+        frequenceLettre = new HashMap<Character, Integer>();
+        codeCharacter = new HashMap<Character, String>();
+        codeLettre = new HashMap<String, Character>();
+        this.huffTree = arbre;
+        this.texteEncodé = codeBinaire;
+        this.makeHuffCode();
+          for (Character f : codeCharacter.keySet()) {
+            this.codeLettre.put(codeCharacter.get(f), f);
         }
-        System.out.println("texte encodé = "+texteEncodé);
+        this.Decodebit(texteEncodé);
+
+    }
+
+    private void EncodeTexte(String txtDepart) {
+        this.texteEncodé = "";
+        for (char e : txtDepart.toCharArray()) {
+            texteEncodé += codeCharacter.get(e);
+        }
+
+
+    }
+
+    public String getTexteEncodé() {
+        return texteEncodé;
+    }
+
+    public String Decodebit(String txtToDecode) {
+        System.out.println(this.codeCharacter);
+        String tmp = "";
+        int begin, end;
+        begin = 0;
+        end = 0;
+        for (int i = 0; i < txtToDecode.length(); i++) {
+
+            if (codeLettre.containsKey(txtToDecode.substring(begin, end))) {
+
+                tmp += codeLettre.get(txtToDecode.substring(begin, end));
+                begin = i;
+                end = begin + 1;
+            } else {
+                if ((i + 1) < txtToDecode.length()) {
+
+                    end = i + 1;
+                }
+            }
+
+        }
+        System.out.println("decodage = "+tmp);
+        return tmp;
 
     }
 
@@ -60,7 +112,7 @@ public class Huffman {
     public HashMap<Character, String> getCodeCharacter() {
         return codeCharacter;
     }
-    
+
 
     /*Retourne un tableau de frŽquence dont la position de la frŽquence i correspond au caract�re i dans la table ASCII*/
     public int[] freqCount(String text) {
@@ -76,8 +128,8 @@ public class Huffman {
     public BinaryTree<HuffmanNode> makeHuffTree() throws PriorityQueueException {
         //Initialisation de la PriorityQueue
         PriorityQueueHeap heap = new PriorityQueueHeap(frequenceLettre.size());
-        Comparator comparatorhuff= new HuffmanComparator();
-       // PriorityQueue<BinaryNode<HuffmanNode>> tmp=new PriorityQueue<BinaryNode<HuffmanNode>>(frequenceLettre.size(),comparatorhuff);
+        Comparator comparatorhuff = new HuffmanComparator();
+        // PriorityQueue<BinaryNode<HuffmanNode>> tmp=new PriorityQueue<BinaryNode<HuffmanNode>>(frequenceLettre.size(),comparatorhuff);
 
         //Remplissage de la PriorityQueue
 
@@ -86,13 +138,13 @@ public class Huffman {
             HuffmanNode HNode = new HuffmanNode(frequenceLettre.get(e), e);
             HNode.setPoids(1);
             BinaryNode<HuffmanNode> BNode = new BinaryNode<HuffmanNode>(HNode, null, null, null);
-            System.out.println(BNode.element());
+
             heap.add(BNode);
         }
 
         //Fusions d'arbres
         while (heap.size() > 1) {
-            System.out.println("Nombre elemn dans Heap="+heap.size());
+
             BinaryNode<HuffmanNode> T1;
             BinaryNode<HuffmanNode> T2;
             BinaryNode<HuffmanNode> BNode;
@@ -100,13 +152,12 @@ public class Huffman {
 
             T1 = heap.removeMin();
             T2 = heap.removeMin();
-            System.out.println("T1 = "+T1);
-            System.out.println("T2 = "+T2);
+
             HNode = new HuffmanNode(T1.element().getFrequence() + T2.element().getFrequence());
             BNode = new BinaryNode<HuffmanNode>(HNode, null, T1, T2);
 
             heap.add(BNode);
-            System.out.println("Etat du heap = "+heap.size());
+
         }
         //Le dernier arbre restant est l'arbre de Huffman
 
