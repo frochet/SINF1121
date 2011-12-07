@@ -21,7 +21,7 @@ public class Huffman {
 		}
 	}
 	
-	public void construcTree() throws PriorityQueueException{
+	public void makeHuffTree() throws PriorityQueueException{
 		//Initialisation de la PriorityQueue
 		PriorityQueueHeap<BinaryTree<HuffmanNode>> heap = new PriorityQueueHeap<BinaryTree<HuffmanNode>>(NCHAR);
 		//Remplissage de la PriorityQueue
@@ -47,13 +47,6 @@ public class Huffman {
 					T1.getRoot().element().getFrequence() +
 					T2.getRoot().element().getFrequence());
 			T3.setRoot(new BinaryNode<HuffmanNode>(T3Node,null,T1.getRoot(),T2.getRoot()));
-			if (T1.getRoot().isExternal()==true) {
-				huffCode[(char)T1.getRoot().element().getLetter()]=huffCode[(char)T1.getRoot().element().getLetter()]+"0";
-				huffCode[(char)T2.getRoot().element().getLetter()]=huffCode[(char)T2.getRoot().element().getLetter()]+"1";
-			}
-			else {
-				
-			}
 			
 			heap.add(T3); // ATTENTION, méthode incorrecte, on devrait avoir plutot heap.insert(i,freq(i))
 		}
@@ -61,14 +54,25 @@ public class Huffman {
 		huffTree=heap.peek();	
 	}	
 		
-
-	public void makeHuffCode(BinaryTree<BinaryNode<HuffmanNode>> tree, String upCode){
-		if (tree.getRoot().isExternal()==false) {
-			//TO-DO
+	//Fonction récursive donnant le code pour chaque lettre
+	public void makeHuffCodeRec(BinaryTree<HuffmanNode> tree, String upCode){
+		if (tree.getRoot().isExternal()==true) {
+			if (tree.getRoot().getLeft()!=null) {
+				makeHuffCode(tree,upCode+"0");
+			}
+			if (tree.getRoot().getRight()!=null) {
+				makeHuffCode(tree,upCode+"1");
+			}
 		}
 		else {
-			//TO-DO
-		} 
+			
+			huffCode[(int)(tree.getRoot().element().getLetter())]=upCode;
+		}
+		
+	}
+	//Fonction donnant le code entier en appeler une fonction récursive sur l'arbre d'Huffman
+	public void makeHuffCode()	{
+		makeHuffCodeRec(huffTree,"");
 	}
 	
 	

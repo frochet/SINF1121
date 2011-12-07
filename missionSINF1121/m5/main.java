@@ -7,7 +7,8 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Huffman Huff=new Huffman(str);
-		Huff.construcTree();
+		Huff.makeHuffTree();
+		Huff.makeHuffCode();
 		
 	}
 
