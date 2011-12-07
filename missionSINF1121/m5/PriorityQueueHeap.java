@@ -1,6 +1,7 @@
 
 /*
  * Auteur : Florentin, Claude
+ * Avec l'aide du site www.developpez.com
  */
 public class PriorityQueueHeap{
 	
