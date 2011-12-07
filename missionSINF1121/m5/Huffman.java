@@ -58,10 +58,10 @@ public class Huffman {
 	public void makeHuffCodeRec(BinaryTree<HuffmanNode> tree, String upCode){
 		if (tree.getRoot().isExternal()==true) {
 			if (tree.getRoot().getLeft()!=null) {
-				makeHuffCode(tree,upCode+"0");
+				makeHuffCodeRec(tree,upCode+"0");
 			}
 			if (tree.getRoot().getRight()!=null) {
-				makeHuffCode(tree,upCode+"1");
+				makeHuffCodeRec(tree,upCode+"1");
 			}
 		}
 		else {
