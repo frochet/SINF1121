@@ -62,6 +62,10 @@ public class PriorityQueueHeap{
 			throw new PriorityQueueException("File vide.");
 	}
 	public BinaryNode<HuffmanNode> removeMin() throws PriorityQueueException{
+		/*
+		 * Si le noeud courant n'a pas d'enfant, aucun échange n'est à effectuer. S'il n'y a qu'un seul enfant, il est obligatoirement à gauche, on les échange si l'enfant est plus grand.
+Si le noeud courant possède deux enfants, on va échanger la valeur courante avec celle du plus grand enfant. Ainsi, on est sûr que le nouveau noeud courant respectera la condition de tas. 
+		 */
 		BinaryNode<HuffmanNode> tmp = this.peek();
 		nbrObject--;
 		
