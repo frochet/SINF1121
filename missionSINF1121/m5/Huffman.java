@@ -21,7 +21,7 @@ public class Huffman {
 		return huffCode;
 	}
 	
-	public String[] getHuffTree(){
+	public BinaryTree<HuffmanNode> getHuffTree(){
 		return huffTree;
 	}
 	
@@ -37,56 +37,58 @@ public class Huffman {
 		
 	public BinaryTree<HuffmanNode> makeHuffTree() throws PriorityQueueException{
 		//Initialisation de la PriorityQueue
-		PriorityQueueHeap<BinaryTree<HuffmanNode>> heap = new PriorityQueueHeap<BinaryTree<HuffmanNode>>(NCHAR);
+		PriorityQueueHeap heap = new PriorityQueueHeap(NCHAR);
 		//Remplissage de la PriorityQueue
 		for (int i=0;i<freq.length;i++)
 		{
-			BinaryTree<HuffmanNode> currentTree = new BinaryTree<HuffmanNode>();
-			HuffmanNode currentNode= new HuffmanNode(freq[i], (char)i);
-			currentTree.setRoot(new BinaryNode<HuffmanNode>(currentNode,null,null,null));
-			heap.add(currentTree);
+			if (freq[i]>0){
+				HuffmanNode HNode= new HuffmanNode(freq[i], (char)i);
+				BinaryNode<HuffmanNode> BNode=new BinaryNode<HuffmanNode>(HNode,null,null,null);
+				heap.add(BNode);
+			}
 		}
 		//Fusions d'arbres
 		while(heap.size()>1)
-		{
-			
-			BinaryTree<HuffmanNode> T1;
-			BinaryTree<HuffmanNode> T2;
-			BinaryTree<HuffmanNode> T3;
+		{		
+			BinaryNode<HuffmanNode> T1;
+			BinaryNode<HuffmanNode> T2;
+			BinaryNode<HuffmanNode> BNode;
+			HuffmanNode HNode;
 			
 			T1=heap.peek();
 			T2=heap.peek();
-			T3=new BinaryTree<HuffmanNode>();
-			HuffmanNode T3Node= new HuffmanNode(
-					T1.getRoot().element().getFrequence() +
-					T2.getRoot().element().getFrequence());
-			T3.setRoot(new BinaryNode<HuffmanNode>(T3Node,null,T1.getRoot(),T2.getRoot()));
+			HNode=new HuffmanNode(T1.element().getFrequence() + T2.element().getFrequence());
+			BNode=new BinaryNode<HuffmanNode>(HNode,null,T1,T2);
 			
-			heap.add(T3);
+			heap.add(BNode);
 		}
 		//Le dernier arbre restant est l'arbre de Huffman
-		return heap.peek();	
+		
+		BinaryTree<HuffmanNode> res=new BinaryTree<HuffmanNode>();
+		res.setRoot(heap.peek());
+		
+		return res;	
 	}	
 		
 	//Fonction récursive donnant le code pour chaque lettre
-	public void makeHuffCodeRec(BinaryTree<HuffmanNode> tree, String upCode){
-		if (tree.getRoot().isExternal()==true) {
-			if (tree.getRoot().getLeft()!=null) {
+	public void makeHuffCodeRec(BinaryNode<HuffmanNode> tree, String upCode){
+		if (tree.isExternal()==true) {
+			if (tree.getLeft()!=null) {
 				makeHuffCodeRec(tree,upCode+"0");
 			}
-			if (tree.getRoot().getRight()!=null) {
+			if (tree.getRight()!=null) {
 				makeHuffCodeRec(tree,upCode+"1");
 			}
 		}
 		else {
 			
-			huffCode[(int)(tree.getRoot().element().getLetter())]=upCode;
+			huffCode[(int)(tree.element().getLetter())]=upCode;
 		}
 		
 	}
 	//Fonction donnant le code de Huffman entier en appeler une fonction récursive sur l'arbre d'Huffman
 	public void makeHuffCode()	{
-		 makeHuffCodeRec(huffTree,"");
+		 makeHuffCodeRec(huffTree.getRoot(),"");
 	}
 	
 	
