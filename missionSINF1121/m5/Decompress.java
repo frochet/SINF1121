@@ -1,5 +1,5 @@
 /*
- * @author : Gérard Valéry
+ * @author : Gï¿½rard Valï¿½ry
  */
 public class Decompress {
 	private String fileInput,fileDecompressed;
@@ -18,6 +18,6 @@ public class Decompress {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		test
 	}
 }
