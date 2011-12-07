@@ -61,4 +61,34 @@ public class PriorityQueueHeap{
 		else
 			throw new PriorityQueueException("File vide.");
 	}
+	public BinaryNode<HuffmanNode> removeMin() throws PriorityQueueException{
+		BinaryNode<HuffmanNode> tmp = this.peek();
+		nbrObject--;
+		
+		heap[0] = heap[nbrObject];
+		int index = 0;
+		int left = 1;
+		int right = 2;
+		
+		
+		while ((left <= nbrObject && heap[index].getElement().element().compareTo(heap[left].getElement().element()) < 0)
+			|| (right <= nbrObject && heap[index].getElement().element().compareTo(heap[right].getElement().element()) < 0))
+		{
+			int k;
+			
+			// k sera l'indice du plus grand fils.
+			if (right <= nbrObject &&
+					heap[left].getElement().element().compareTo(heap[right].getElement().element()) < 0)
+				k = right;
+			else
+				k = left;
+			
+			swap(k, index);
+			index = k;
+			left = getLeft(index);
+			right = getRight(index);
+		}
+		
+		return tmp;
+	}
 }
