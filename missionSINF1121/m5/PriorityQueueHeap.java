@@ -1,4 +1,3 @@
-import java.util.Comparator;
 
 /*
  * Auteur : Florentin, Claude
