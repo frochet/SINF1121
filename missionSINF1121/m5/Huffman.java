@@ -7,21 +7,28 @@ public class Huffman {
 	private String str; // Le String associŽ ˆ l'arbre
 	private int[] freq;
 	final static int NCHAR = 128; 
-	public Huffman(String str){
+	
+	//Constructeur
+	public Huffman(String str) throws PriorityQueueException{
 		this.str = str;
 		huffTree = new BinaryTree<HuffmanNode>();
+		huffCode = new String[NCHAR];
 		this.freq = freqCount(this.str);
+		this.makeHuffTree();
+		
 	}
 	
-	public void constructCode(){
-		String huffCode[] = new String[NCHAR];
-		for (int i=0;i<freq.length;i++)
-		{
-			
-		}
-	}
-	
-	public void makeHuffTree() throws PriorityQueueException{
+	/*Retourne un tableau de frŽquence dont la position de la frŽquence i correspond au caract�re i dans la table ASCII*/
+	public int[] freqCount(String text) {
+        int freq[] = new int[NCHAR];
+
+        for(int i=0; i<text.length(); i++)
+            freq[text.charAt(i)]++;
+
+        return freq;
+    }
+		
+	public BinaryTree<HuffmanNode> makeHuffTree() throws PriorityQueueException{
 		//Initialisation de la PriorityQueue
 		PriorityQueueHeap<BinaryTree<HuffmanNode>> heap = new PriorityQueueHeap<BinaryTree<HuffmanNode>>(NCHAR);
 		//Remplissage de la PriorityQueue
@@ -30,7 +37,7 @@ public class Huffman {
 			BinaryTree<HuffmanNode> currentTree = new BinaryTree<HuffmanNode>();
 			HuffmanNode currentNode= new HuffmanNode(freq[i], (char)i);
 			currentTree.setRoot(new BinaryNode<HuffmanNode>(currentNode,null,null,null));
-			heap.add(currentTree); // ATTENTION, méthode incorrecte, on devrait avoir plutot heap.insert((char)i,freq(i))
+			heap.add(currentTree);
 		}
 		//Fusions d'arbres
 		while(heap.size()>1)
@@ -48,10 +55,10 @@ public class Huffman {
 					T2.getRoot().element().getFrequence());
 			T3.setRoot(new BinaryNode<HuffmanNode>(T3Node,null,T1.getRoot(),T2.getRoot()));
 			
-			heap.add(T3); // ATTENTION, méthode incorrecte, on devrait avoir plutot heap.insert(i,freq(i))
+			heap.add(T3);
 		}
 		//Le dernier arbre restant est l'arbre de Huffman
-		huffTree=heap.peek();	
+		return heap.peek();	
 	}	
 		
 	//Fonction récursive donnant le code pour chaque lettre
@@ -70,19 +77,11 @@ public class Huffman {
 		}
 		
 	}
-	//Fonction donnant le code entier en appeler une fonction récursive sur l'arbre d'Huffman
+	//Fonction donnant le code de Huffman entier en appeler une fonction récursive sur l'arbre d'Huffman
 	public void makeHuffCode()	{
-		makeHuffCodeRec(huffTree,"");
+		 makeHuffCodeRec(huffTree,"");
 	}
 	
 	
-	/*Retourne un tableau de frŽquence dont la position de la frŽquence i correspond au caract�re i dans la table ASCII*/
-	public int[] freqCount(String text) {
-        int freq[] = new int[NCHAR];
-
-        for(int i=0; i<text.length(); i++)
-            freq[text.charAt(i)]++;
-
-        return freq;
-    }
+	
 }
