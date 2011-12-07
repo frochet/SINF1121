@@ -1,9 +1,15 @@
 /*
  * Auteur : Florentin
  */
-public class BinaryNode<K> {
+public class BinaryNode<K>{
 	private K elem;
 	private BinaryNode<K> parent, rigth,left;
+
+    @Override
+    public String toString() {
+        return elem.toString();
+    }
+
 	public BinaryNode(K elem, BinaryNode<K> parent, BinaryNode<K> left, BinaryNode<K> right){
 		this.elem = elem;
 		this.parent = parent;
@@ -40,5 +46,9 @@ public class BinaryNode<K> {
 	public K element()	{
 		return elem;
 	}
+
+  
+
+
 	
 }

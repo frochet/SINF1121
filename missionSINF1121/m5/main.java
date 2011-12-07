@@ -1,12 +1,18 @@
 
+
+
 public class main {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+        try {
+            Huffman tmp = new Huffman("sssssssssssssssssssssssssalut toi mon petit enfant");
+            System.out.println(tmp.getCodeCharacter());
+        } catch (PriorityQueueException ex) {
+            System.out.println(ex);;
+        }
 	}
 
 }

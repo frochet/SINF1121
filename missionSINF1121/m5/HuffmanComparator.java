@@ -1,15 +1,17 @@
 /*
  * Auteur : Claude
  */
-public class HuffmanComparator implements Comparator<HuffmanNode> {
+public class HuffmanComparator implements Comparator<BinaryNode<HuffmanNode>> {
 
-	@Override
-	public int compare(HuffmanNode arg0, HuffmanNode arg1) {
-		if(arg0.getFrequence() > arg1.getFrequence())
+	
+
+
+    public int compare(BinaryNode<HuffmanNode> arg0, BinaryNode<HuffmanNode> arg1) {
+       if(arg0.element().getFrequence() > arg1.element().getFrequence())
 			return 1;
-		else if(arg0.getFrequence() < arg1.getFrequence())
+		else if(arg0.element().getFrequence() < arg1.element().getFrequence())
 			return -1;
 		else
 			return 0;
-	}
+    }
 }
