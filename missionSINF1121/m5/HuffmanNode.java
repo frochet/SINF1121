@@ -1,5 +1,5 @@
 /*
- * Auteur : Florentin
+ * Auteur : Florentin, Claude
  */
 /*Chaque noeud de l'arbre contiendra soit :
 	 * - Seulement un poid

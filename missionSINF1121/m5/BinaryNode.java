@@ -10,23 +10,19 @@ public class BinaryNode<K> {
 		this.left = left;
 		this.rigth = right;
 	}
-	public void setRight(BinaryNode<K> right)
-	{
+	public void setRight(BinaryNode<K> right)	{
 		this.rigth = right;
 	}
 	
-	public void setLeft(BinaryNode<K> left)
-	{
+	public void setLeft(BinaryNode<K> left)	{
 		this.left = left;
 	}
 	
-	public BinaryNode<K> getRight()
-	{
+	public BinaryNode<K> getRight()	{
 		return rigth;
 	}
 	
-	public BinaryNode<K> getLeft()
-	{
+	public BinaryNode<K> getLeft()	{
 		return left;
 	}
 	
@@ -39,14 +35,9 @@ public class BinaryNode<K> {
 		{
 			return true;
 		}
-	}	
+	}		
 	
-	
-			
-			
-	
-	public K element()
-	{
+	public K element()	{
 		return elem;
 	}
 	

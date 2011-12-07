@@ -10,8 +10,7 @@ public class PriorityQueueHeap<E>{
 		this.heap = new Bucket[defaultsize];
 	}
 	
-	public int size()
-	{
+	public int size()	{
 		return nbrObject;
 	}
 	
