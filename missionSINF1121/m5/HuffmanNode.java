@@ -18,16 +18,7 @@
 		public void setPoids(int poids){
 			this.poids = poids;
 		}
-		@Override
-		public int compareTo(HuffmanNode arg0) {
-			// TODO Auto-generated method stub
-			if(this.frequence > arg0.getFrequence())
-				return 1;
-			else if( this.frequence < arg0.getFrequence())
-				return -1;
-			else
-				return 0;
-		}
+		
 		public int getFrequence(){
 			return this.frequence;
 		}
