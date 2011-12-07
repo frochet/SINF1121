@@ -72,8 +72,7 @@ public class PriorityQueueHeap{
 		
 		
 		while ((left <= nbrObject && heap[index].getElement().element().compareTo(heap[left].getElement().element()) < 0)
-			|| (right <= nbrObject && heap[index].getElement().element().compareTo(heap[right].getElement().element()) < 0))
-		{
+			|| (right <= nbrObject && heap[index].getElement().element().compareTo(heap[right].getElement().element()) < 0)){
 			int k;
 			
 			// k sera l'indice du plus grand fils.
@@ -88,7 +87,6 @@ public class PriorityQueueHeap{
 			left = getLeft(index);
 			right = getRight(index);
 		}
-		
 		return tmp;
 	}
 }
