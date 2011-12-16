@@ -15,7 +15,7 @@ public class Huffman implements Serializable {
     private HashMap<Character, Integer> frequenceLettre;
     private HashMap<Character, String> codeCharacter;
     private HashMap<String, Character> codeLettre;
-    private String texteEncodé;
+    private String texteEncode;
 
     //Constructeur
 
@@ -54,26 +54,26 @@ public class Huffman implements Serializable {
         codeCharacter = new HashMap<Character, String>();
         codeLettre = new HashMap<String, Character>();
         this.huffTree = arbre;
-        this.texteEncodé = codeBinaire;
+        this.texteEncode = codeBinaire;
         this.makeHuffCode();
           for (Character f : codeCharacter.keySet()) {
             this.codeLettre.put(codeCharacter.get(f), f);
         }
-        this.Decodebit(texteEncodé);
+        this.Decodebit(texteEncode);
 
     }
 
     private void EncodeTexte(String txtDepart) {
-        this.texteEncodé = "";
+        this.texteEncode = "";
         for (char e : txtDepart.toCharArray()) {
-            texteEncodé += codeCharacter.get(e);
+            texteEncode += codeCharacter.get(e);
         }
 
 
     }
 
-    public String getTexteEncodé() {
-        return texteEncodé;
+    public String getTexteEncode() {
+        return texteEncode;
     }
 
     public String Decodebit(String txtToDecode) {
